@@ -36,4 +36,5 @@ local function toggle_copliot()
 end
 
 map("n", "<C-/>", toggle_copliot, { desc = "Copilot Toggle" })
+map("n", "<A-/>", "<cmd>: CopilotChatToggle<cr>", { desc = "Copilot Toggle" })
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

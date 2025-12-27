@@ -19,7 +19,7 @@ return {
         blade = { "pint" },
 
         haskell = { "ormolu" },
-        --nix = { "alejandra" },
+        nix = { "alejandra" },
     },
 
     -- Custom formatter definitions
