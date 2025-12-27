@@ -1,0 +1,16 @@
+#wl-clipboard-history -t &
+#wl-paste --watch cliphist store &
+clipcatd
+nm-applet --indicator &
+waypaper --restore &
+blueman-applet &
+#sleep 5 && volctl &
+#sfwbar &
+#xfce4-panel &
+waybar -c ~/.config/waybar/labwc/config.jsonc -s ~/.config/waybar/labwc/style.css &
+#libinput-gestures-setup stop && libinput-gestures-setup start &
+kdeconnect-indicator &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+sleep 5 && python ~/.config/waybar/scripts/wlsunset.py &
+#systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XAUTHORITY &
+#dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &

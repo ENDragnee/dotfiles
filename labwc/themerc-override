@@ -1,0 +1,111 @@
+# ------------------------------------
+# LabWC Theme: Dracula
+# ------------------------------------
+
+# general
+border.width: 1
+
+window.titlebar.padding.width: 4
+window.titlebar.padding.height: 2
+
+# --- WINDOW DECORATIONS ---
+
+# window border
+# Active window gets the bright Purple accent
+window.active.border.color: #bd93f9
+# Inactive window gets a subtle, dark border
+window.inactive.border.color: #44475a
+
+# ToggleKeybinds status indicator (e.g., for resize mode)
+# Red is a great attention-grabbing color
+window.active.indicator.toggled-keybind.color: #ff5555
+
+# window titlebar background
+# Active titlebar is darker to contrast with the background
+window.active.title.bg.color: #44475a
+# Inactive titlebar blends into the main background
+window.inactive.title.bg.color: #282a36
+window.*.title.bg: Solid
+
+# window titlebar text
+# Bright foreground for readability on the active titlebar
+window.active.label.text.color: #f8f8f2
+# Muted comment color for inactive windows
+window.inactive.label.text.color: #6272a4
+window.label.text.justify: center
+
+# window button width and spacing
+window.button.width: 24
+window.button.height: 24
+window.button.spacing: 2
+
+# window buttons (close, max, min icons)
+# Bright foreground on active windows
+window.active.button.unpressed.image.color: #f8f8f2
+# Muted comment color on inactive windows
+window.inactive.button.unpressed.image.color: #6272a4
+
+# Example of custom button colors on hover for a nice effect
+window.active.button.hover.bg.color: #6272a4
+window.active.button.close.hover.bg.color: #ff5555
+window.active.button.max.hover.bg.color: #50fa7b
+window.active.button.iconify.hover.bg.color: #f1fa8c
+
+# window drop-shadows (subtle semi-transparent black)
+window.active.shadow.size: 20
+window.inactive.shadow.size: 10
+window.active.shadow.color: #00000080
+window.inactive.shadow.color: #00000060
+
+
+# --- MENUS (Right-click menu, etc.) ---
+
+menu.border.width: 1
+menu.border.color: #bd93f9
+# Main background for menu items
+menu.items.bg.color: #282a36
+# Main foreground for menu text
+menu.items.text.color: #f8f8f2
+# Selection color for the highlighted menu item
+menu.items.active.bg.color: #44475a
+menu.items.active.text.color: #f8f8f2
+menu.items.padding.x: 8
+menu.items.padding.y: 5
+menu.separator.width: 1
+menu.separator.padding.width: 4
+menu.separator.padding.height: 4
+# A subtle separator line
+menu.separator.color: #44475a
+# Menu title gets the Purple accent
+menu.title.bg.color: #bd93f9
+# Use the background color for the text for a cool "cutout" effect
+menu.title.text.color: #282a36
+menu.title.text.justify: Center
+
+
+# --- ON SCREEN DISPLAY (OSD - e.g., Alt+Tab Window Switcher) ---
+
+osd.bg.color: #282a36
+osd.border.color: #bd93f9
+osd.border.width: 2
+osd.label.text.color: #f8f8f2
+
+osd.window-switcher.width: 60%
+osd.window-switcher.padding: 5
+osd.window-switcher.item.padding.x: 5
+osd.window-switcher.item.padding.y: 5
+osd.window-switcher.item.active.border.width: 2
+osd.window-switcher.preview.border.width: 1
+osd.window-switcher.preview.border.color: #bd93f9
+
+# --- SNAPPING OVERLAY (When tiling windows to edges) ---
+
+# Use a semi-transparent Purple to show the snap area
+snapping.overlay.region.bg.color: #bd93f980
+snapping.overlay.edge.bg.color: #bd93f980
+snapping.overlay.region.border.width: 2
+snapping.overlay.edge.border.width: 2
+# A solid Purple border for the snap overlay
+snapping.overlay.region.border.color: #bd93f9
+snapping.overlay.edge.border.color: #bd93f9
+  

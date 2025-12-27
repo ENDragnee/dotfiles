@@ -1,0 +1,4 @@
+export XDG_SESSION_TYPE=wayland
+export QT_QPA_PLATFORM=wayland
+export SDL_VIDEODRIVER=wayland
+export CLUTTER_BACKEND=wayland
