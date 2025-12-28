@@ -1,0 +1,26 @@
+background=#151422
+background-opacity=0.75
+unfocused-split-opacity=0.5
+foreground=#d8dee9
+
+font-family="FantasqueSansM Nerd Font Propo"
+font-size=16
+
+keybind = alt+w=close_surface
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+n=new_window
+keybind = ctrl+shift+right=new_split:right
+keybind = ctrl+shift+left=new_split:left
+keybind = ctrl+shift+down=new_split:down
+keybind = ctrl+shift+up=new_split:up
+keybind = alt+left=goto_split:left
+keybind = alt+up=goto_split:up
+keybind = alt+right=goto_split:right
+keybind = alt+down=goto_split:down
+keybind = alt+shift+left=resize_split:left,10
+keybind = alt+shift+right=resize_split:right,10
+keybind = alt+shift+up=resize_split:up,10
+keybind = alt+shift+down=resize_split:down,10
+keybind = alt+.=equalize_splits
+keybind = ctrl+.=clear_screen
+

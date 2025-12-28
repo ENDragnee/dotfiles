@@ -757,14 +757,8 @@
     <windowRule identifier="zen" maximized="true">
       <action name="SendToDesktop" to="2" follow="yes"/>
     </windowRule>
-    <windowRule identifier="pavucontrol" maximized="true">
-      <action name="SendToDesktop" to="9" follow="yes"/>
-    </windowRule>
-    <windowRule identifier="com.github.taiko2k.tauonmb" maximized="true">
-      <action name="SendToDesktop" to="9" follow="yes"/>
-    </windowRule>
-    <windowRule identifier="Spotify" maximized="true">
-      <action name="SendToDesktop" to="9" follow="yes"/>
+    <windowRule identifier="Brave" maximized="true">
+      <action name="SendToDesktop" to="2" follow="yes"/>
     </windowRule>
     <windowRule identifier="nemo" maximized="true">
       <action name="SendToDesktop" to="3" follow="yes"/>
@@ -784,11 +778,26 @@
     <windowRule identifier="com.usebottles.bottles" maximized="true">
       <action name="SendToDesktop" to="4" follow="yes"/>
     </windowRule>
+    <windowRule identifier="org.telegram.desktop" maximized="true">
+      <action name="SendToDesktop" to="5" follow="yes"/>
+    </windowRule>
+    <windowRule identifier="virt-manager" maximized="true">
+      <action name="SendToDesktop" to="6" follow="yes"/>
+    </windowRule>
     <windowRule identifier="Code" maximized="true">
       <action name="SendToDesktop" to="7" follow="yes"/>
     </windowRule>
-    <windowRule identifier="Brave" maximized="true">
+    <windowRule identifier="VeraCrypt" maximized="true">
       <action name="SendToDesktop" to="8" follow="yes"/>
+    </windowRule>
+    <windowRule identifier="pavucontrol" maximized="true">
+      <action name="SendToDesktop" to="9" follow="yes"/>
+    </windowRule>
+    <windowRule identifier="com.github.taiko2k.tauonmb" maximized="true">
+      <action name="SendToDesktop" to="9" follow="yes"/>
+    </windowRule>
+    <windowRule identifier="Spotify" maximized="true">
+      <action name="SendToDesktop" to="9" follow="yes"/>
     </windowRule>
   </windowRules>
     

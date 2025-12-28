@@ -1,0 +1,166 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 46,
+    "modules-left": [
+        "niri/workspaces",
+        "battery"
+    ],
+    "modules-center": ["niri/window"],
+    "modules-right": [
+        "gamemode",
+        "tray",
+        "backlight",
+        "wireplumber",
+        "custom/weather",
+        "clock",
+        "group/group-power"
+    ],
+
+    "niri/window": {
+        "format": " {}",
+        "max-length": 32
+    },
+    "niri/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate",
+        "format": "{icon}",
+        "icon-size": 16,
+        "spacing": 12, 
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "7": "",
+            "8": "",
+            "9": "",
+            "10": "",
+            "11": ""
+        },
+        "persistent-workspaces": {
+            "*": 1,
+            "*": 2,
+            "*": 3,
+            "*": 4,
+            "*": 5,
+            "*": 6,
+            "*": 7,
+            "*": 8,
+            "*": 9
+        }
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 12
+    },
+    "clock": {
+//        "format": "{: %I:%M}",
+        "spacing": 12,
+        "timezone": "Africa/Addis_Ababa",
+        "tooltip-format": "<tt><big>{calendar}</big></tt>",
+        "calendar": {
+            "format":{
+                "today": "<span color='#ff8c36'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", "", "", ""]
+    },
+
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 1800,
+        "exec": "python ~/.config/waybar/scripts/waybar-weather.py",
+        "icon-size": 16,
+        "return-type": "json",
+        "spacing": 12,
+        "on-click": "pkill -SIGRTMIN+8 waybar"
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{percent}% {icon}",
+        "format-icons": ["󰃚", "󰃞", "󰃟", "󰃠"]
+    },
+
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-icons": ["", "", ""],
+        "format-muted": "󰝟 Muted",
+        "on-click": "pwvucontrol",
+        "max-volume": 150,
+        "scroll-step": 5.0
+    },
+
+    "gamemode": {
+        "format": "{glyph}",
+        "format-alt": "{glyph} {count}",
+        "glyph": "󰬎",
+        "hide-not-running": true,
+        "use-icon": true,
+        "icon-name": "input-gaming-symbolic",
+        "icon-spacing": 4,
+        "icon-size": 16,
+        "tooltip": true,
+        "tooltip-format": "Games running: {count}"
+    },
+
+    "group/group-power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/power",
+            "custom/quit",
+            "custom/lock",
+            "custom/reboot"
+        ]
+    },
+
+    "custom/quit": {
+        "format": "󰗼",
+        "tooltip": false,
+        "icon-size": 16,
+        "on-click": "niri msg action quit"
+    },
+    "custom/lock": {
+        "format": "󰍁",
+        "tooltip": false,
+        "icon-size": 16,
+        "on-click": "swaylock"
+    },
+    "custom/reboot": {
+        "format": "󰜉",
+        "tooltip": false,
+        "icon-size": 16,
+        "on-click": "reboot"
+    },
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "icon-size": 16,
+        "on-click": "shutdown now"
+    }
+}
