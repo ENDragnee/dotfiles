@@ -1,6 +1,13 @@
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu, QAction, QInputDialog, QMessageBox
+from PyQt5.QtWidgets import (
+    QApplication,
+    QSystemTrayIcon,
+    QMenu,
+    QAction,
+    QInputDialog,
+    QMessageBox,
+)
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QProcess, QTimer
 from datetime import datetime, time, timedelta
@@ -12,7 +19,9 @@ class WLSunsetTrayApp:
 
         self.icons = {
             "day": os.path.expanduser("~/.config/waybar/scripts/day-mode.svg"),
-            "night": os.path.expanduser("~/.config/waybar/scripts/night-mode-light.svg")
+            "night": os.path.expanduser(
+                "~/.config/waybar/scripts/night-mode-light.svg"
+            ),
         }
 
         self.tray_icon = QSystemTrayIcon(QIcon(self.icons["day"]), self.app)
@@ -47,7 +56,7 @@ class WLSunsetTrayApp:
         # Start wlsunset process
         self.process = None
         self.start_wlsunset()
-        
+
         # Perform the initial setup for the icon and start the first timer
         self.update_icon_and_timer()
 
@@ -62,22 +71,28 @@ class WLSunsetTrayApp:
 
         if today_sunrise <= now < today_sunset:
             self.tray_icon.setIcon(QIcon(self.icons["day"]))
-            self.tray_icon.setToolTip(f"Day Mode. Next change at {sunset_time.strftime('%H:%M')}")
+            self.tray_icon.setToolTip(
+                f"Day Mode. Next change at {sunset_time.strftime('%H:%M')}"
+            )
             next_transition = today_sunset
         else:
             self.tray_icon.setIcon(QIcon(self.icons["night"]))
 
             if now < today_sunrise:
-                self.tray_icon.setToolTip(f"Night Mode. Next change at {sunrise_time.strftime('%H:%M')}")
+                self.tray_icon.setToolTip(
+                    f"Night Mode. Next change at {sunrise_time.strftime('%H:%M')}"
+                )
                 next_transition = today_sunrise
             else:
                 tomorrow_sunrise = today_sunrise + timedelta(days=1)
-                self.tray_icon.setToolTip(f"Night Mode. Next change at {sunrise_time.strftime('%H:%M')} tomorrow")
+                self.tray_icon.setToolTip(
+                    f"Night Mode. Next change at {sunrise_time.strftime('%H:%M')} tomorrow"
+                )
                 next_transition = tomorrow_sunrise
 
         time_difference = next_transition - now
 
-        delay_ms = int(time_difference.total_seconds() * 1000) + 1000 
+        delay_ms = int(time_difference.total_seconds() * 1000) + 1000
 
         self.timer.start(delay_ms)
 
@@ -87,20 +102,31 @@ class WLSunsetTrayApp:
             self.process.waitForFinished(3000)
 
         self.process = QProcess(self.app)
-        command = f"wlsunset -l {self.latitude} -L {self.longitude} -t {self.temperature}"
+        command = (
+            f"wlsunset -l {self.latitude} -L {self.longitude} -t {self.temperature}"
+        )
         self.process.start(command)
 
     def change_location(self):
-        lat, ok_lat = QInputDialog.getText(None, "Change Latitude", "Enter Latitude:", text=self.latitude)
+        lat, ok_lat = QInputDialog.getText(
+            None, "Change Latitude", "Enter Latitude:", text=self.latitude
+        )
         if ok_lat and lat:
-            lon, ok_lon = QInputDialog.getText(None, "Change Longitude", "Enter Longitude:", text=self.longitude)
+            lon, ok_lon = QInputDialog.getText(
+                None, "Change Longitude", "Enter Longitude:", text=self.longitude
+            )
             if ok_lon and lon:
                 self.latitude = lat
                 self.longitude = lon
                 self.start_wlsunset()
 
     def change_temperature(self):
-        temp, ok_temp = QInputDialog.getText(None, "Change Temperature", "Enter Temperature (Kelvin):", text=self.temperature)
+        temp, ok_temp = QInputDialog.getText(
+            None,
+            "Change Temperature",
+            "Enter Temperature (Kelvin):",
+            text=self.temperature,
+        )
         if ok_temp and temp:
             self.temperature = temp
             self.start_wlsunset()

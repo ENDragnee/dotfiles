@@ -25,7 +25,8 @@
     "wlr/taskbar": {
         "format": "{icon} {name}",
         "max-length": 32,
-        "on-click": "minimize-raise"
+        "on-click": "minimize-raise",
+        "on-click-right":"close"
     },
     "ext/workspaces": {
         "disable-scroll": true,

@@ -4,6 +4,11 @@ if not functions -q zellij_auto
     source $__fish_config_dir/functions/zellij_auto.fish
 end
 
+set -gx PNPM_HOME "/home/end/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
     alias ls='lsd --color=auto --sort "extension"'
@@ -40,3 +45,10 @@ set -gx SOPS_AGE_KEY_FILE "$HOME/.age/key.txt"
 # Flutter path
 # fish_add_path -g -p ~/develop/flutter/bin
 # fish_add_path -g -p ~/develop/android-studio/bin
+
+# pnpm
+set -gx PNPM_HOME "/home/end/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
