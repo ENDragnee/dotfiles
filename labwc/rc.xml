@@ -314,7 +314,7 @@
       <action name="Execute" command="rofi -show emoji -emoji-format '{emoji}' -modi emoji -theme '~/.config/rofi/emoji/style-8.rasi'" />
     </keybind>
     <keybind key="W-q">
-      <action name="Execute" command="wlogout" />
+      <action name="Execute" command="wlogout -s" />
     </keybind>
     <keybind key="W-S-f">
       <action name="Execute" command="nemo" />
