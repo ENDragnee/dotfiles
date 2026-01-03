@@ -46,6 +46,8 @@ set -gx SOPS_AGE_KEY_FILE "$HOME/.age/key.txt"
 # fish_add_path -g -p ~/develop/flutter/bin
 # fish_add_path -g -p ~/develop/android-studio/bin
 
+fish_add_path -g -p ~/.config/emacs/bin
+
 # pnpm
 set -gx PNPM_HOME "/home/end/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
