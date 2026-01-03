@@ -754,8 +754,9 @@
 
   <windowRules>
     <windowRule identifier="*" serverDecoration="no" />
-    <windowRule identifier="Emacs" maximized="true">
+    <windowRule identifier="emacs" maximized="true">
       <action name="SendToDesktop" to="1" follow="yes"/>
+      <action name="ToggleMaximize"/>
     </windowRule>
     <windowRule identifier="zen" maximized="true">
       <action name="SendToDesktop" to="2" follow="yes"/>
