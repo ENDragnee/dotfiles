@@ -6,6 +6,9 @@ map("i", "jk", "<ESC>")
 
 map("n", "<C-l>", "<Nop>", { silent = true })
 
+map("n", "<A-p>", "<cmd> Telescope project <cr>", { desc = "Projects" })
+map("n", "<A-l>", "<cmd> Telescope terms <cr>", { desc = "Toggle hidden terminals" })
+
 local M = {}
 
 M.general = {

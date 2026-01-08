@@ -24,16 +24,9 @@ local function toggle_copliot()
         print "Copilot not installed"
         return
     end
-
-    if copilot_enabled == true then
-        vim.cmd "Copilot disable"
-        copilot_enabled = false
-        print "Copilot Disabled"
-    else
-        vim.cmd "Copilot enable"
-        copilot_enabled = true
-        print "Copilot Enabled"
-    end
+    vim.cmd "Copilot toggle"
+    copilot_enabled = not copilot_enabled
+    print("Copilot " .. (copilot_enabled == true and "disabled" or "enabled"))
 end
 
 map("n", "<C-/>", toggle_copliot, { desc = "Copilot Toggle" })
