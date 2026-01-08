@@ -304,6 +304,14 @@
     <keybind key="A-S-Tab">
       <action name="PreviousWindow" />
     </keybind>
+    <keybind key="C-A-Up">
+      <action name="NextWindow" workspace="current" output="all" identifier="all"/>
+    </keybind>
+    <keybind key="C-A-Down">
+      <action name="PreviousWindow" workspace="current" output="all" identifier="all"/>
+    </keybind>
+
+
     <keybind key="W-o">
       <action name="Execute" command="~/.config/rofi/launchers/type-2/launcher.sh" />
     </keybind>
