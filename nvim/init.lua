@@ -36,8 +36,3 @@ require "nvchad.autocmds"
 vim.schedule(function()
     require "mappings"
 end)
-
-if vim.fn.exists ":Copilot" == false then
-    print "Install copilot or do Lazy install on the command mode"
-end
-vim.cmd "Copilot toggle"

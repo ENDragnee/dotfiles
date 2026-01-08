@@ -18,7 +18,7 @@ map("n", "K", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Open diagnos
 
 map("n", "<leader>gd", vim.lsp.buf.definition)
 
-local copilot_enabled = false
+local copilot_enabled = true
 local function toggle_copliot()
     if vim.fn.exists ":Copilot" == false then
         print "Copilot not installed"
