@@ -18,15 +18,24 @@ map("n", "K", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Open diagnos
 
 map("n", "<leader>gd", vim.lsp.buf.definition)
 
-local copilot_enabled = true
+local function is_copilot_enabled()
+    local clients = vim.lsp.get_clients { name = "copilot" }
+    return not vim.tbl_isempty(clients)
+end
+
 local function toggle_copliot()
     if vim.fn.exists ":Copilot" == false then
         print "Copilot not installed"
         return
     end
-    vim.cmd "Copilot toggle"
-    copilot_enabled = not copilot_enabled
-    print("Copilot " .. (copilot_enabled == true and "disabled" or "enabled"))
+
+    if is_copilot_enabled() then
+        vim.cmd ":Copilot disable"
+        print "Copilot is disabled"
+    else
+        vim.cmd ":Copilot enable"
+        print "Copilot is enabled"
+    end
 end
 
 map("n", "<C-/>", toggle_copliot, { desc = "Copilot Toggle" })
