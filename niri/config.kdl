@@ -10,12 +10,12 @@ workspace ""
 
 // You can set environment variables for niri and its children here.
 environment {
-    QT_QPA_PLATFORM "wayland"
+    // QT_QPA_PLATFORM "wayland"
     DISPLAY ":1"
     // GBM_BACKEND "nvidia-drm"
     // __GLX_VENDOR_LIBRARY_NAME "nvidia"
-    WLR_NO_HARDWARE_CURSORS "1"
-    SDL_VIDEODRIVER "wayland" 
+    // WLR_NO_HARDWARE_CURSORS "1"
+    // SDL_VIDEODRIVER "wayland" 
 }
 // Input configuration.
 input {
@@ -253,7 +253,7 @@ spawn-at-startup "waypaper" "--restore"
 spawn-at-startup "bash" "-c" "sleep 5 && night_light.sh"
 // spawn-at-startup "volctl"
 spawn-at-startup "nm-applet" "--indicator"
-// spawn-at-startup "xwayland-satellite"
+spawn-at-startup "xwayland-satellite"
 
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -666,8 +666,8 @@ binds {
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
-    Mod+F { maximize-column; }
-    Mod+Space { fullscreen-window; }
+    Mod+F { fullscreen-window; }
+    Mod+Space { maximize-column; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".
