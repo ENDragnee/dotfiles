@@ -1,34 +1,46 @@
 -- ~/.config/nvim/lua/configs/lspconfig.lua
 
-require("nvchad.configs.lspconfig").defaults()
+local on_attach = require("nvchad.configs.lspconfig").on_attach
+local on_init = require("nvchad.configs.lspconfig").on_init
+local capabilities = require("nvchad.configs.lspconfig").capabilities
 
-local servers = {
-    -- PHP / Laravel
-    "intelephense",
-    "laravel_ls",
+local lspconfig = require "lspconfig"
 
-    -- Web
-    "cssls",
-    "tailwindcss",
-    "html",
-    "eslint",
-    "ts_ls",
+require("mason-lspconfig").setup {
+    handlers = {
+        -- default handler
+        function(server_name)
+            lspconfig[server_name].setup {
+                on_attach = on_attach,
+                on_init = on_init,
+                capabilities = capabilities,
+            }
+        end,
 
-    -- Other
-    "bashls",
-    "clangd",
-    "pylsp",
-    "graphql",
-    "prismals",
-    "jinja_lsp",
-    "dockerls",
-    "dotls",
-    "jdtls",
-    "qmlls",
-    "rnix",
-    "docker_compose_language_service",
+        -- lua specific override
+        ["lua_ls"] = function()
+            lspconfig.lua_ls.setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
+                        workspace = {
+                            -- Make the server aware of Neovim runtime files
+                            library = vim.api.nvim_get_runtime_file("", true),
+                            checkThirdParty = false,
+                        },
+
+                        telemetry = {
+                            enable = false,
+                        },
+                    },
+                },
+            }
+        end,
+    },
 }
-
-vim.lsp.enable(servers)
 
 vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition)

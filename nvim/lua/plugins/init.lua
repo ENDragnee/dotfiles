@@ -14,14 +14,9 @@ return {
         opts = require "configs.conform",
     },
     {
-        "neovim/nvim-lspconfig",
-        config = function()
-            require "configs.lspconfig"
-        end,
-    },
-    {
         "williamboman/mason.nvim",
         opts = {
+            cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
             ensure_installed = {
                 -- PHP / Laravel
                 "intelephense", -- PHP LSP
@@ -52,6 +47,21 @@ return {
                 "jdtl",
             },
         },
+        config = function(_, opts)
+            require("mason").setup(opts)
+        end,
+    },
+    {
+        "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
+        },
+        config = function()
+            require("mason-lspconfig").setup()
+            require "configs.lspconfig"
+        end,
     },
 
     -- SYNTAX HIGHLIGHTING with Treesitter

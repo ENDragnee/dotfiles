@@ -13,6 +13,7 @@ return {
         json = { "prettier" },
         yaml = { "prettier" },
         markdown = { "prettier" },
+        astro = { "prettierd" },
 
         -- Laravel / PHP
         php = { "pint" },
@@ -33,7 +34,7 @@ return {
     -- format_on_save = false,
 
     format_on_save = {
-        timeout_ms = 1000, -- increase timeout for large files
+        timeout_ms = 200, -- increase timeout for large files
         lsp_fallback = true,
     },
 }
