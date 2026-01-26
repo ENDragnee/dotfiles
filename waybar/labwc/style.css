@@ -33,8 +33,10 @@ tooltip {
 }
 
 #workspaces button.active {
+  margin: 4px 3px;
+  padding: 2px 2px;
   background: #404552;
-  color: #7c818c;
+  color: #ff8c36;
 }
 
 #workspaces button.focused {
@@ -49,8 +51,8 @@ tooltip {
 }
 
 #workspaces button:hover {
-  background: #ff79c6;
-  color: #cdd6f4;
+  background: #551133;
+  color: #ff8c36;
   border-radius: 10px;
 }
 
