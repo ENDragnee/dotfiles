@@ -489,25 +489,22 @@ binds {
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "0" "+5%"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "0" "-5%"; }
-    XF86AudioMute        allow-when-locked=true { spawn "pactl" "set-sink-mute" "0" "toggle"; }
+    //XF86AudioRaiseVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "0" "+5%"; }
+    //XF86AudioLowerVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "0" "-5%"; }
+    //XF86AudioMute        allow-when-locked=true { spawn "pactl" "set-sink-mute" "0" "toggle"; }
     XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "5%+"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
-    //XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-    //XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-    //XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    //XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-    Mod+O repeat=false hotkey-overlay-title="Open fuzzel Menu" { spawn "fuzzel"; }
-    //Mod+Shift+A repeat=false hotkey-overlay-title="Open fuzzel Menu" { spawn "/home/end/.config/fuzzel/scripts/clip_board.sh"; }
+    //Mod+O repeat=false hotkey-overlay-title="Open fuzzel Menu" { spawn "fuzzel"; }
+    Mod+O hotkey-overlay-title="Open rofi Menu" { spawn "~/.config/rofi/launchers/type-2/launcher.sh"; }
 
     Mod+Shift+A repeat=false hotkey-overlay-title="Open clipboard" { spawn "clipcat-menu";}
     Mod+Alt+Period hotkey-overlay-title="Open Emoji Picker" { spawn "/home/end/.config/fuzzel/scripts/fuzzel_emoji.sh"; }
     Mod+A hotkey-overlay-title="Open Niri Window Picker" { spawn "/home/end/.config/fuzzel/scripts/niri_windows.sh"; }
-    // Mod+Shift+A repeat=false hotkey-overlay-title="Open fuzzel Menu" { spawn "copyq" "menu"; }
-    // Mod+O repeat=false hotkey-overlay-title="Open fuzzel Menu" { spawn "wofi" "--show" "drun"; }
-    // Mod+O hotkey-overlay-title="Open Rofi Applications Menu" { spawn "~/.config/rofi/launchers/type-2/launcher.sh"; }
     Mod+Shift+B hotkey-overlay-title="Open Zen Browser" { spawn "zen-browser"; }
     Mod+Shift+M hotkey-overlay-title="Open Tauon Music Box" { spawn "flatpak" "--user" "run" "com.github.taiko2k.tauonmb"; }
     Mod+Alt+M hotkey-overlay-title="Open Spotify" { spawn "launch_spotify.sh"; }
