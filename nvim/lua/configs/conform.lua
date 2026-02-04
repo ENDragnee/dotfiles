@@ -21,6 +21,8 @@ return {
 
         haskell = { "ormolu" },
         nix = { "alejandra" },
+
+        go = { "goimports", "golines", "goimports-reviser" },
     },
 
     -- Custom formatter definitions
