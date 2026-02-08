@@ -247,12 +247,12 @@ spawn-at-startup "clipcatd"
 //spawn-at-startup "rog-control-center"
 //spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 //spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
-spawn-at-startup "~/bin/toggle_bar.sh"
+// spawn-at-startup "~/bin/toggle_bar.sh"
 //spawn-at-startup "copyq"
-spawn-at-startup "waypaper" "--restore"
-spawn-at-startup "bash" "-c" "sleep 5 && night_light.sh"
+// spawn-at-startup "waypaper" "--restore"
+// spawn-at-startup "bash" "-c" "sleep 5 && night_light.sh"
 // spawn-at-startup "volctl"
-spawn-at-startup "nm-applet" "--indicator"
+// spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "xwayland-satellite"
 
 
@@ -729,3 +729,11 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 }
+
+include "dms/cursor.kdl"
+include "dms/colors.kdl"
+include "dms/layout.kdl"
+include "dms/alttab.kdl"
+include "dms/binds.kdl"
+include "dms/outputs.kdl"
+
