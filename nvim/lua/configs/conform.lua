@@ -25,18 +25,25 @@ return {
         go = { "goimports", "golines", "goimports-reviser" },
     },
 
-    -- Custom formatter definitions
-    formatters = {
-        pint = {
-            command = "pint",
-            args = {}, -- no --stdin
-            stdin = false, -- run on files
-        },
-    },
     -- format_on_save = false,
 
-    format_on_save = {
-        timeout_ms = 200, -- increase timeout for large files
-        lsp_fallback = true,
-    },
+    -- format_on_save = {
+    --     timeout_ms = 200,
+    --     lsp_fallback = true,
+    -- },
+
+    format_on_save = function(bufnr)
+        local ft = vim.bo[bufnr].filetype
+
+        if ft == "php" or ft == "blade" then
+            return {
+                timeout_ms = 500,
+                lsp_fallback = true,
+            }
+        end
+        return {
+            timeout_ms = 200,
+            lsp_fallback = true,
+        }
+    end,
 }
