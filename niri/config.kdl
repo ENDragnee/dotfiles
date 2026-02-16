@@ -480,26 +480,7 @@ binds {
     Mod+Alt+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Mod+Ctrl+Return hotkey-overlay-title="Open a Terminal: termite" { spawn "termite"; }
     Mod+B hotkey-overlay-title="Toggle the Bar: waybar" { spawn "~/bin/waybar/niri-toggle.sh"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
-    // You can also use a shell. Do this if you need pipes, multiple commands, etc.
-    // Note: the entire command goes as a single argument in the end.
-    // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
-
-    // Example volume keys mappings for PipeWire & WirePlumber.
-    // The allow-when-locked=true property makes them work even when the session is locked.
-
-    //XF86AudioRaiseVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "0" "+5%"; }
-    //XF86AudioLowerVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "0" "-5%"; }
-    //XF86AudioMute        allow-when-locked=true { spawn "pactl" "set-sink-mute" "0" "toggle"; }
-    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "5%+"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
-    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-
-    //Mod+O repeat=false hotkey-overlay-title="Open fuzzel Menu" { spawn "fuzzel"; }
     Mod+O hotkey-overlay-title="Open rofi Menu" { spawn "~/.config/rofi/launchers/type-2/launcher.sh"; }
 
     Mod+Shift+A repeat=false hotkey-overlay-title="Open clipboard" { spawn "clipcat-menu";}

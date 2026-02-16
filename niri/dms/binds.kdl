@@ -6,7 +6,7 @@ binds {
 
     // === Application Launchers ===
     Mod+T hotkey-overlay-title="Open Terminal" { spawn "alacritty"; }
-    Mod+Ctrl+Space hotkey-overlay-title="Application Launcher" {
+    Mod+Alt+O hotkey-overlay-title="Application Launcher" {
         spawn "dms" "ipc" "call" "spotlight" "toggle";
     }
     Mod+V hotkey-overlay-title="Clipboard Manager" {
@@ -70,7 +70,8 @@ binds {
     }
 
     // === Window Management ===
-    Mod+Q repeat=false { close-window; }
+    // Mod+Q repeat=false { spawn "wlogout" "-s"; }
+    Mod+Q repeat=false { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
     // Mod+F { maximize-column; }
     // Mod+Shift+F { fullscreen-window; }
     Mod+Shift+T { toggle-window-floating; }
