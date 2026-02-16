@@ -47,6 +47,7 @@ set -gx SOPS_AGE_KEY_FILE "$HOME/.age/key.txt"
 # fish_add_path -g -p ~/develop/android-studio/bin
 
 fish_add_path -g -p ~/.config/emacs/bin
+fish_add_path --prepend --move ~/.local/share/pnpm
 
 # pnpm
 set -gx PNPM_HOME "/home/end/.local/share/pnpm"

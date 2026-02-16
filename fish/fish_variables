@@ -4,4 +4,4 @@ SETUVAR --export XDG_CACHE_HOME:/home/end/\x2ecache
 SETUVAR --export XDG_CONFIG_HOME:/home/end/\x2econfig
 SETUVAR --export XDG_DATA_HOME:/home/end/\x2elocal/share
 SETUVAR __fish_initialized:4300
-SETUVAR fish_user_paths:/home/end/\x2elocal/bin\x1e/home/end/bin/tests/\x1e/home/end/bin/\x1e/usr/bin
+SETUVAR fish_user_paths:/home/end/\x2elocal/share/pnpm\x1e/home/end/\x2econfig/emacs/bin\x1e/home/end/\x2elocal/bin\x1e/home/end/bin/tests/\x1e/home/end/bin/\x1e/usr/bin
