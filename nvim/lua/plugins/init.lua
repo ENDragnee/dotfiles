@@ -78,6 +78,8 @@ return {
                 "php",
                 "blade",
                 "java",
+                "graphql",
+                "typescript",
             },
             highlight = {
                 enable = true,
