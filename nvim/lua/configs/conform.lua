@@ -6,10 +6,10 @@ return {
         python = { "black" },
 
         -- Web
-        css = { "prettier" },
-        html = { "prettier" },
-        javascript = { "prettier" },
-        typescript = { "prettier" },
+        css = { "prettierd" },
+        html = { "prettierd" },
+        javascript = { "prettierd" },
+        typescript = { "prettierd" },
         json = { "prettier" },
         yaml = { "prettier" },
         markdown = { "prettier" },
