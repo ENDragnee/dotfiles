@@ -1,4 +1,5 @@
 source $__fish_config_dir/enviroment.fish
+source $__fish_config_dir/functions/load-secrets.fish
 
 if not functions -q zellij_auto
     source $__fish_config_dir/functions/zellij_auto.fish
@@ -41,6 +42,7 @@ set -x PATH $PYENV_ROOT/bin $PATH
 pyenv init - | source
 
 set -gx SOPS_AGE_KEY_FILE "$HOME/.age/key.txt"
+load_secrets
 
 # Flutter path
 # fish_add_path -g -p ~/develop/flutter/bin
