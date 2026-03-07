@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export GEMINI_API_KEY:AIzaSyBBkPcrVtb8NcQKDdkBEYhOgAC8sxh9_1E
 SETUVAR --export XDG_CACHE_HOME:/home/end/\x2ecache
 SETUVAR --export XDG_CONFIG_HOME:/home/end/\x2econfig
 SETUVAR --export XDG_DATA_HOME:/home/end/\x2elocal/share

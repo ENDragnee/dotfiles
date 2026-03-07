@@ -30,6 +30,7 @@ return {
                 "html", -- HTML LSP
                 "tailwindcss-language-server", -- TailwindCSS LSP
                 "prettier", -- Formatter
+                "prettierd", -- Formatter
                 "eslint_d", -- JS/TS Linter
                 "eslint-lsp", -- JS/TS Linter
                 "typescript-language-server",
