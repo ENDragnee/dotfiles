@@ -109,6 +109,13 @@ return {
         cmd = "Copilot",
         event = "InsertEnter",
         opts = {
+            filetypes = {
+                yaml = false,
+                markdown = false,
+                help = false,
+                agentic = false, -- Tell Copilot to ignore the Agentic chat buffer
+                ["agentic-prompt"] = false,
+            },
             suggestion = {
                 enabled = true,
                 auto_trigger = true,
@@ -231,5 +238,125 @@ return {
         config = function()
             require("telescope").load_extension "project"
         end,
+    },
+    {
+        "carlos-algms/agentic.nvim",
+
+        dependencies = {
+            {
+                "hakonharnes/img-clip.nvim",
+            },
+        },
+        opts = {
+            -- Any ACP-compatible provider works. Built-in: "claude-agent-acp" | "gemini-acp" | "codex-acp" | "opencode-acp" | "cursor-acp" | "copilot-acp" | "auggie-acp" | "mistral-vibe-acp" | "cline-acp" | "goose-acp"
+            provider = "gemini-acp", -- setting the name here is all you need to get started
+            acp_providers = {
+                ["gemini-acp"] = {
+                    command = "gemini",
+                    args = { "--experimental-acp", "--model", "gemini-3-flash-preview" },
+                    env = {
+                        GEMINI_API_KEY = os.getenv "NEOVIM_GEMINI_API_KEY",
+                    },
+                },
+                ["claude-agent-acp"] = {
+                    env = {
+                        ANTHROPIC_API_KEY = os.getenv "ANTHROPIC_API_KEY",
+                    },
+                },
+
+                -- Example of how override the ACP command to suit your installation, if needed
+                ["codex-acp"] = {
+                    command = "~/.local/bin/codex-acp",
+                },
+
+                -- Add any new ACP-compatible provider — the name and command are up to you
+                ["my-cool-acp"] = {
+                    name = "My Cool ACP",
+                    command = "cool-acp",
+                    args = { "--mode", "acp" },
+                    env = {
+                        COOL_API_KEY = os.getenv "COOL_API_KEY",
+                    },
+                },
+            },
+        },
+
+        -- these are just suggested keymaps; customize as desired
+        keys = {
+            {
+                "<C-`>",
+                function()
+                    require("agentic").toggle()
+                end,
+                mode = { "n", "v", "i" },
+                desc = "Toggle Agentic Chat",
+            },
+            {
+                "<C-,>",
+                function()
+                    require("agentic").new_session()
+                end,
+                mode = { "n", "v", "i" },
+                desc = "New Agentic Session",
+            },
+            {
+                "<A-i>r", -- ai Restore
+                function()
+                    require("agentic").restore_session()
+                end,
+                desc = "Agentic Restore session",
+                silent = true,
+                mode = { "n", "v", "i" },
+            },
+            {
+                "<leader>ac",
+                function()
+                    require("agentic").toggle()
+                end,
+                mode = { "n", "v" },
+                desc = "Toggle Agentic Chat",
+            },
+            {
+                "<leader>aa",
+                function()
+                    require("agentic").add_selection_or_file_to_context()
+                end,
+                mode = { "n", "v" },
+                desc = "Add file or selection to Agentic to Context",
+            },
+            {
+                "<leader>an",
+                function()
+                    require("agentic").new_session()
+                end,
+                mode = { "n", "v" },
+                desc = "New Agentic Session",
+            },
+            {
+                "<leader>ar", -- ai Restore
+                function()
+                    require("agentic").restore_session()
+                end,
+                desc = "Agentic Restore session",
+                silent = true,
+                mode = { "n", "v" },
+            },
+            {
+                "<leader>ad", -- ai Diagnostics
+                function()
+                    require("agentic").add_current_line_diagnostics()
+                end,
+                desc = "Add current line diagnostic to Agentic",
+                mode = { "n" },
+            },
+            {
+                "<leader>aD", -- ai all Diagnostics
+                function()
+                    require("agentic").add_buffer_diagnostics()
+                end,
+                desc = "Add all buffer diagnostics to Agentic",
+                mode = { "n" },
+            },
+        },
     },
 }

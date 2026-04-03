@@ -7,7 +7,7 @@ local M = {}
 -- require("custom.clipboard")
 
 M.base46 = {
-    theme = "chadracula-evondev",
+    theme = "gruvbox",
 
     -- hl_override = {
     -- 	Comment = { italic = true },

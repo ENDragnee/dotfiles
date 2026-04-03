@@ -5,22 +5,22 @@ return {
 		config = function()
 			require('base16-colorscheme').setup({
 
-				base00 = '#1e1f29',
-				base01 = '#232530',
-				base02 = '#232530',
-				base03 = '#9e99a5',
-				base0B = '#ffda72',
-				base04 = '#f5efff',
-				base05 = '#fbf8ff',
-				base06 = '#fbf8ff',
-				base07 = '#fbf8ff',
-				base08 = '#ff9fb1',
-				base09 = '#ff9fb1',
-				base0A = '#c9a8ff',
-				base0C = '#e2d1ff',
-				base0D = '#c9a8ff',
-				base0E = '#d2b7ff',
-				base0F = '#d2b7ff',
+				base00 = '#18120b',
+				base01 = '#211b13',
+				base02 = '#251f17',
+				base03 = '#9f9a92',
+				base0B = '#ffe466',
+				base04 = '#fff7ee',
+				base05 = '#fffbf8',
+				base06 = '#fffbf8',
+				base07 = '#fffbf8',
+				base08 = '#ff9d96',
+				base09 = '#ff9d96',
+				base0A = '#ffcb88',
+				base0C = '#ffe3c0',
+				base0D = '#ffcb88',
+				base0E = '#ffd49d',
+				base0F = '#ffd49d',
 			})
 
 			local current_file_path = vim.fn.stdpath("config") .. "/lua/plugins/dankcolors.lua"
