@@ -1,0 +1,134 @@
+// Window rules.
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+window-rule {
+    match app-id="vlc"
+    open-fullscreen true
+}
+
+window-rule {
+    match app-id=r#"brave-browser$"#
+    open-on-workspace "" 
+    open-maximized true
+}
+window-rule {
+    match app-id=r#"firefox$"#
+    open-on-workspace "" 
+    open-maximized true
+}
+window-rule {
+    match app-id=r#"zen$"#
+    open-on-workspace "" 
+    open-maximized true
+}
+
+window-rule {
+    match app-id=r#"^libreoffice-.*$"#
+    open-on-workspace ""
+    open-maximized true
+}
+
+
+window-rule {
+    match app-id=r#"steam$"#
+    open-on-workspace ""
+    open-maximized true
+}
+window-rule {
+    match app-id=r#"^net\.lutris\.Lutris$"#
+    open-on-workspace ""
+}
+window-rule {
+    match app-id=r#"lutris$"#
+    open-on-workspace ""
+}
+window-rule {
+    match app-id=r#"^com\.usebottles\.bottles$"#
+    open-on-workspace ""
+}
+
+window-rule {
+    match app-id=r#"^org\.telegram\.desktop$"#
+    open-on-workspace ""
+}
+
+
+window-rule {
+    match app-id=r#"^virt-manager$"#
+    open-on-workspace ""
+}
+
+
+window-rule {
+    match app-id=r#"code"#
+    open-on-workspace ""
+}
+window-rule {
+    match app-id=r#"jetbrains-idea-ce"#
+    open-on-workspace ""
+}
+
+
+window-rule {
+    match app-id=r#"^com\.github\.taiko2k\.tauonmb$"#
+    open-on-workspace ""
+}
+window-rule {
+    match app-id=r#"Spotify"#
+    open-maximized true
+    open-on-workspace ""
+}
+
+
+window-rule {
+  match app-id=r#"pavucontrol"#
+  open-on-workspace ""
+}
+window-rule {
+  match app-id=r#"pwvucontrol"#
+  open-on-workspace ""
+}
+
+
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+window-rule {
+    match app-id=r#"zen$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+window-rule {
+    match app-id=r#"brave-browser$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+  match app-id=r#"rofi"#
+  open-floating true
+}
+window-rule {
+  match app-id=r#"pavucontrol"#
+  open-floating true
+}
+window-rule {
+  match app-id=r#"pwvucontrol"#
+  open-floating true
+}
+window-rule {
+    match app-id="wine"
+    default-floating-position x=0 y=0
+}
+
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    block-out-from "screen-capture"
+}
+
+window-rule {
+    open-focused true
+    opacity 1.0
+}
