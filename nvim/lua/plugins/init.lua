@@ -359,4 +359,54 @@ return {
             },
         },
     },
+    {
+        "mfussenegger/nvim-dap",
+        config = function()
+            local dap = require "dap"
+            -- Define codelldb adapter (assumes Mason installation)
+            dap.adapters.codelldb = {
+                type = "server",
+                port = "${port}",
+                executable = {
+                    command = vim.fn.stdpath "data" .. "/mason/bin/codelldb",
+                    args = { "--port", "${port}" },
+                },
+            }
+            -- Configure C debugging to prompt for executable path
+            dap.configurations.c = {
+                {
+                    name = "Launch",
+                    type = "codelldb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    cwd = "${workspaceFolder}",
+                },
+            }
+            dap.configurations.cpp = dap.configurations.c
+        end,
+    },
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+        config = function()
+            local dap, dapui = require "dap", require "dapui"
+            dapui.setup()
+            dap.listeners.before.attach.dapui_config = function()
+                dapui.open()
+            end
+            dap.listeners.before.launch.dapui_config = function()
+                dapui.open()
+            end
+        end,
+    },
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+        opts = {
+            ensure_installed = { "codelldb" },
+            handlers = {}, -- automatically sets up codelldb for you
+        },
+    },
 }
