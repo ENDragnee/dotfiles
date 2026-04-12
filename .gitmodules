@@ -1,0 +1,4 @@
+[submodule "emacs"]
+	path = emacs
+	url = https://github.com/doomemacs/doomemacs
+	branch = master

@@ -66,10 +66,32 @@ return {
     },
 
     -- SYNTAX HIGHLIGHTING with Treesitter
+    -- SYNTAX HIGHLIGHTING with Treesitter (main branch architecture)
     {
         "nvim-treesitter/nvim-treesitter",
-        opts = {
-            ensure_installed = {
+        branch = "main",
+        build = ":TSUpdate",
+        lazy = false, -- Important: The main branch does NOT support lazy-loading
+        config = function()
+            local ts = require "nvim-treesitter"
+
+            -- 1. Setup Custom Blade Parser
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "TSUpdate",
+                callback = function()
+                    require("nvim-treesitter.parsers").blade = {
+                        install_info = {
+                            url = "https://github.com/EmranMR/tree-sitter-blade",
+                            files = { "src/parser.c", "src/scanner.cc" },
+                            branch = "main",
+                        },
+                    }
+                end,
+            })
+            vim.treesitter.language.register("blade", "blade")
+
+            -- 2. Automatically install languages
+            local parsers = {
                 "vim",
                 "lua",
                 "vimdoc",
@@ -77,29 +99,36 @@ return {
                 "css",
                 "javascript",
                 "php",
-                "blade",
                 "java",
                 "graphql",
                 "typescript",
-            },
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = { "blade" },
-            },
-            indent = { enable = true },
-        },
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
-
-            local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-            parser_config.blade = {
-                install_info = {
-                    url = "https://github.com/EmranMR/tree-sitter-blade",
-                    files = { "src/parser.c", "src/scanner.cc" },
-                    branch = "main",
-                },
-                filetype = "blade",
+                "python",
             }
+            local function isnt_installed(lang)
+                return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) == 0
+            end
+            local to_install = vim.tbl_filter(isnt_installed, parsers)
+            if #to_install > 0 then
+                ts.install(to_install)
+            end
+
+            -- 3. Start Highlighting and Indentation natively
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function(args)
+                    -- Safely start treesitter
+                    local ok = pcall(vim.treesitter.start, args.buf)
+
+                    if ok then
+                        -- Enable treesitter indentation
+                        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+                        -- Fallback to regex highlighting for blade (replaces additional_vim_regex_highlighting)
+                        if vim.bo[args.buf].filetype == "blade" then
+                            vim.bo[args.buf].syntax = "on"
+                        end
+                    end
+                end,
+            })
         end,
     },
 
@@ -385,6 +414,31 @@ return {
                 },
             }
             dap.configurations.cpp = dap.configurations.c
+
+            dap.adapters.python = {
+                type = "executable",
+                command = vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python",
+                args = { "-m", "debugpy.adapter" },
+            }
+            dap.configurations.python = {
+                {
+                    type = "python", -- Matches the adapter name above
+                    request = "launch",
+                    name = "Launch file",
+                    program = "${file}", -- Runs the current file
+                    pythonPath = function()
+                        -- Automatically use virtual environments if they exist
+                        local cwd = vim.fn.getcwd()
+                        if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+                            return cwd .. "/venv/bin/python"
+                        elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+                            return cwd .. "/.venv/bin/python"
+                        else
+                            return "/usr/bin/python" -- Arch Linux default system python
+                        end
+                    end,
+                },
+            }
         end,
     },
     {
@@ -405,8 +459,19 @@ return {
         "jay-babu/mason-nvim-dap.nvim",
         dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
         opts = {
-            ensure_installed = { "codelldb" },
+            ensure_installed = { "codelldb", "python" },
             handlers = {}, -- automatically sets up codelldb for you
         },
+    },
+    {
+        "mfussenegger/nvim-dap-python",
+        dependencies = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
+        config = function()
+            -- Point dap-python to the debugpy installation provided by Mason
+            local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
+            local debugpy_path = mason_path .. "packages/debugpy/venv/bin/python"
+
+            require("dap-python").setup(debugpy_path)
+        end,
     },
 }
