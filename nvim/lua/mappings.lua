@@ -8,9 +8,9 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
 -- Unmap <C-l> in normal mode to avoid window navigation conflict
-map("n", "<C-l>", "<Nop>", { silent = true })
+-- map("n", "<C-l>", "<Nop>", { silent = true })
 
-map("i", "<C-l>", function()
+map("i", "<C-/>", function()
     require("copilot.suggestion").accept_line()
 end, { expr = false, noremap = true, silent = true, desc = "Copilot Accept Line" })
 

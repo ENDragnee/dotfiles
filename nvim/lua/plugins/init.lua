@@ -298,6 +298,31 @@ return {
                     command = "~/.local/bin/codex-acp",
                 },
 
+                ["goose-ollama"] = {
+                    command = "/home/end/.local/bin/goose",
+                    args = { "acp", "--with-builtin", "developer" },
+                    env = {
+                        OLLAMA_HOST = "http://localhost:11434",
+                        GOOSE_TELEMETRY = "false",
+                        GOOSE_PROVIDER = "ollama",
+                        GOOSE_MODEL = "llama3.2:latest",
+
+                        -- 1. FORCE THE PATHS (Stops the /home(end) hallucination)
+                        HOME = "/home/end",
+                        USER = "end",
+
+                        -- 2. FORCE THE WORKING DIRECTORY
+                        -- This tells Goose exactly where Neovim is standing
+                        GOOSE_WORKING_DIR = vim.fn.getcwd(),
+
+                        -- 3. ENABLE "SESSION" PERSISTENCE
+                        -- This makes it act more like the standalone CLI
+                        GOOSE_SESSION_ID = "nvim-session",
+
+                        OLLAMA_KEEP_ALIVE = "-1",
+                    },
+                },
+
                 -- Add any new ACP-compatible provider — the name and command are up to you
                 ["my-cool-acp"] = {
                     name = "My Cool ACP",
@@ -410,7 +435,12 @@ return {
                     program = function()
                         return vim.fn.input("Path: ", vim.fn.getcwd() .. "/", "file")
                     end,
+                    args = function()
+                        local args_str = vim.fn.input "Arguments: "
+                        return vim.split(args_str, " +")
+                    end,
                     cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
                 },
             }
             dap.configurations.cpp = dap.configurations.c
