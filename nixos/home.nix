@@ -107,6 +107,10 @@
     drawio
     wine-staging
     chess-tui
+    brave
+    obs-studio
+    flameshot
+    hyprpicker
 
     #dev tools
     nodejs_25
@@ -124,10 +128,7 @@
     zoxide
     distrobox
     ollama
-    brave
-    obs-studio
-    flameshot
-    hyprpicker
+    pyenv
 
     #fonts
     nerd-fonts.hack
