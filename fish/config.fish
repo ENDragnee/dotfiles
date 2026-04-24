@@ -7,15 +7,15 @@ end
 
 set -gx PNPM_HOME "/home/end/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
 end
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
     alias ls='lsd --color=auto --sort "extension"'
-    alias la='lsd -a --sort "extension"'   
+    alias la='lsd -a --sort "extension"'
     alias ll='lsd -lah --sort "extension"'
-    alias l='lsd --sort "extension"' 
+    alias l='lsd --sort "extension"'
     alias l.='lsd -A | egrep '^\.' --sort "extension"'
     alias clear='clear && colorscript -r'
     alias y="yazi"
@@ -33,7 +33,6 @@ if status is-interactive
     alias cd="z"
     zoxide init fish | source
 end
-
 
 # Created by `pipx` on 2025-10-19 14:49:23
 set PATH $PATH /home/end/.local/bin
@@ -54,6 +53,6 @@ fish_add_path --prepend --move ~/.local/share/pnpm
 # pnpm
 set -gx PNPM_HOME "/home/end/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end

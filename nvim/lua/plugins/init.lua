@@ -41,7 +41,7 @@ return {
                 "clangd",
                 "pylsp",
                 "graphql",
-                "prismals",
+                "prisma-language-server",
                 "jinja_lsp",
                 "dockerls",
                 "dotls",
