@@ -45,6 +45,10 @@
     enable = true;
     interval = "weekly";
   };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # Add this line
+  };
 
   services.fstrim.enable = true;
   hardware.bluetooth.enable = true;
@@ -61,7 +65,6 @@
   # Set your time zone.
   time.timeZone = "Africa/Addis_Ababa";
   nixpkgs.config.allowUnfree = true;
-  hardware.graphics.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

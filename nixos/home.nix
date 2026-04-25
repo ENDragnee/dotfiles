@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -111,6 +112,7 @@
     obs-studio
     flameshot
     hyprpicker
+    gnome-disk-utility
 
     #dev tools
     nodejs_25
@@ -141,13 +143,17 @@
     nerd-fonts.fantasque-sans-mono
     corefonts
     liberation_ttf
-    adw-gtk3
 
     #theme
     gruvbox-kvantum
     gruvbox-dark-gtk
     gruvbox-gtk-theme
     gruvbox-dark-icons-gtk
+    libsForQt5.qt5ct
+    libsForQt5.qtstyleplugin-kvantum
+    adw-gtk3
+    kdePackages.qt6ct
+    kdePackages.qtstyleplugin-kvantum
   ];
   fonts.fontconfig.enable = true;
 
@@ -180,13 +186,17 @@
       name = "oomox-gruvbox-dark";
       package = pkgs.gruvbox-dark-icons-gtk;
     };
+    font = {
+      name = "FiraCode Nerd Font 12"; # Family name and size
+      package = pkgs.nerd-fonts.fira-mono; # Package containing the font
+    };
     gtk3.extraConfig = {gtk-application-prefer-dark-theme = 1;};
     gtk4.extraConfig = {gtk-application-prefer-dark-theme = 1;};
   };
   qt = {
     enable = true;
-    # platformTheme.name = "kvantum";
-    # style.name = "kvantum";
+    platformTheme.name = "qtct";
+    style.name = "kvantum";
   };
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
@@ -261,9 +271,11 @@
     };
   };
   xdg.configFile."niri/custom.kdl".source = ./niri-config.kdl;
-  programs.home-manager.enable = true;
+  # programs.home-manager.enable = true;
   home.sessionVariables = {
     # QT_STYLE_OVERRIDE = "kvantum";
+    # QT_QPA_PLATFORMTHEME = "qt5ct";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     # QT_QPA_PLATFORMTHEME = "kvantum";
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
