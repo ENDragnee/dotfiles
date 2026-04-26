@@ -22,6 +22,8 @@
     yazi
     lsd
     # home-manager
+    ani-cli
+    xterm
 
     # archives
     zip
@@ -131,6 +133,9 @@
     distrobox
     ollama
     pyenv
+    stylua
+    # prettier
+    # prettierd
 
     #fonts
     nerd-fonts.hack

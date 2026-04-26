@@ -16,6 +16,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot = {
+    kernel.sysctl = {
+      "net.ipv4.ip_forward" = 1;
+      "net.ipv6.conf.all.forwarding" = 1;
+    };
     plymouth = {
       enable = true;
       theme = "darth_vader";
@@ -105,6 +109,7 @@
     options = [
       "users" # Allows any user to mount and unmount
       "nofail" # Prevent system from failing if this drive doesn't mount
+      "x-gvfs-show"
     ];
   };
 
@@ -114,6 +119,7 @@
     options = [
       "users" # Allows any user to mount and unmount
       "nofail" # Prevent system from failing if this drive doesn't mount
+      "x-gvfs-show"
     ];
   };
 
@@ -123,6 +129,7 @@
     options = [
       "users" # Allows any user to mount and unmount
       "nofail" # Prevent system from failing if this drive doesn't mount
+      "x-gvfs-show"
     ];
   };
 
@@ -151,8 +158,12 @@
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
   services.flatpak.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+  services.tumbler.enable = true;
+  services.dbus.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.end = {
@@ -164,7 +175,8 @@
     shell = pkgs.fish;
   };
 
-  programs.firefox.enable = true;
+  # programs.firefox.enable = true;
+  programs.dconf.enable = true;
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
   programs.niri = {
@@ -172,6 +184,18 @@
   };
   programs.fish.enable = true;
   # programs.uwsm.enable = true;
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries here if programs crash
+    stdenv.cc.cc
+    zlib
+    fuse3
+    icu
+    nss
+    openssl
+    curl
+    expat
+  ];
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -183,6 +207,9 @@
     asusctl
     nvtopPackages.full
     dnsmasq
+    adwaita-icon-theme
+    glib
+    libmtp
   ];
 
   virtualisation.docker.enable = true;
