@@ -24,6 +24,7 @@
     # home-manager
     ani-cli
     xterm
+    picard
 
     # archives
     zip
