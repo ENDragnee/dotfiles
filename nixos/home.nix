@@ -116,6 +116,7 @@
     flameshot
     hyprpicker
     gnome-disk-utility
+    qbittorrent
 
     #dev tools
     nodejs_25
@@ -135,6 +136,7 @@
     ollama
     pyenv
     stylua
+    gemini-cli
     # prettier
     # prettierd
 
@@ -173,6 +175,12 @@
       };
       init.defaultBranch = "main";
     };
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableFishIntegration = true;
   };
 
   home.pointerCursor = {
@@ -285,6 +293,37 @@
     # QT_QPA_PLATFORMTHEME = "kvantum";
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
+    TERM = "xterm-256color";
+  };
+  xresources.properties = {
+    "XTerm*faceName" = "Hack Nerd Font:size=12";
+    "XTerm*renderFont" = "true";
+    "XTerm*shading" = "100";
+    "XTerm*scrollBar" = "false";
+    "XTerm*vt100*geometry" = "100x30";
+    "XTerm*saveLines" = "4096";
+    "XTerm*charClass" = "33:48,35:48,37:48,43:48,45-47:48,58:48,61:48,63:48,64:48,95:48,126:48";
+
+    # Gruvbox Dark Colors
+    "XTerm*background" = "#282828";
+    "XTerm*foreground" = "#ebdbb2";
+    "XTerm*cursorColor" = "#ebdbb2";
+    "XTerm*color0" = "#282828";
+    "XTerm*color8" = "#928374";
+    "XTerm*color1" = "#cc241d";
+    "XTerm*color9" = "#fb4934";
+    "XTerm*color2" = "#98971a";
+    "XTerm*color10" = "#b8bb26";
+    "XTerm*color3" = "#d79921";
+    "XTerm*color11" = "#fabd2f";
+    "XTerm*color4" = "#458588";
+    "XTerm*color12" = "#83a598";
+    "XTerm*color5" = "#b16286";
+    "XTerm*color13" = "#d3869b";
+    "XTerm*color6" = "#689d6a";
+    "XTerm*color14" = "#8ec07c";
+    "XTerm*color7" = "#a89984";
+    "XTerm*color15" = "#ebdbb2";
   };
   # programs.fish = {
   #   enable = true;
