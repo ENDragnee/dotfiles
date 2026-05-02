@@ -25,6 +25,7 @@
     ani-cli
     xterm
     picard
+    linux-wifi-hotspot
 
     # archives
     zip
@@ -119,7 +120,7 @@
     qbittorrent
 
     #dev tools
-    nodejs_25
+    nodejs_24
     bun
     pnpm
     gcc
@@ -233,6 +234,7 @@
   };
   programs.dank-material-shell = {
     enable = true;
+    dgop.package = inputs.dgop.packages.${pkgs.system}.default;
     systemd = {
       enable = true; # Systemd service for auto-start
       restartIfChanged = true; # Auto-restart dms.service when dank-material-shell changes

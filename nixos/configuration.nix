@@ -164,6 +164,8 @@
   services.dbus.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.end = {
@@ -216,8 +218,12 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gnome];
-    config.common.default = "*";
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config.common.default = ["gtk"];
+    config.niri.default = ["gnome" "gtk"];
   };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -237,7 +243,7 @@
   networking.firewall.trustedInterfaces = ["virbr0"];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
