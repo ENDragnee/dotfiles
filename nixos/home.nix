@@ -21,11 +21,15 @@
     fastfetch
     yazi
     lsd
+    ncdu
+    btdu
+    gnuchess
     # home-manager
     ani-cli
     xterm
     picard
     linux-wifi-hotspot
+    qalculate-gtk
 
     # archives
     zip
@@ -118,6 +122,7 @@
     hyprpicker
     gnome-disk-utility
     qbittorrent
+    polkit_gnome
 
     #dev tools
     nodejs_24
