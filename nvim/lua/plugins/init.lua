@@ -34,11 +34,12 @@ return {
                 "eslint_d", -- JS/TS Linter
                 "eslint-lsp", -- JS/TS Linter
                 "typescript-language-server",
+                "vue-language-server",
 
                 -- Other tools
                 "stylua", -- Lua formatter
                 "bashls",
-                "clangd",
+                -- "clangd",
                 "pylsp",
                 "graphql",
                 "prisma-language-server",

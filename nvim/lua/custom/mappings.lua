@@ -36,3 +36,5 @@ end, { desc = "Dap Terminate" })
 map("n", "<leader>du", function()
     require("dapui").toggle()
 end, { desc = "Toggle DAP UI" })
+
+map("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
