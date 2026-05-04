@@ -53,6 +53,19 @@
     enable = true;
     enable32Bit = true; # Add this line
   };
+  services.avahi = {
+    enable = true;
+    hostName = "vds-host";
+    nssmdns4 = true;
+    ipv4 = true;
+    ipv6 = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+    };
+    openFirewall = true;
+  };
 
   services.fstrim.enable = true;
   hardware.bluetooth.enable = true;
@@ -132,6 +145,11 @@
       "x-gvfs-show"
     ];
   };
+  swapDevices = [
+    {
+      device = "/dev/disk/by-uuid/4eebb7e2-67c1-4e47-8f2c-7342ed054296";
+    }
+  ];
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -181,6 +199,8 @@
   programs.dconf.enable = true;
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
+  programs.seahorse.enable = true;
+  programs.kdeconnect.enable = true;
   programs.niri = {
     enable = true;
   };
@@ -212,6 +232,9 @@
     adwaita-icon-theme
     glib
     libmtp
+    nettools
+    seahorse
+    virt-viewer
   ];
 
   virtualisation.docker.enable = true;
@@ -239,9 +262,9 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [22];
+  networking.firewall.allowedTCPPorts = [22 22000];
   networking.firewall.trustedInterfaces = ["virbr0"];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedUDPPorts = [21027 22000];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
 
