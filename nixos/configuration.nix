@@ -116,40 +116,40 @@
     powerManagement.enable = true;
   };
 
-  fileSystems."/mnt/arch-home" = {
-    device = "/dev/disk/by-uuid/fbce7138-5767-4deb-813a-13a63065340e";
-    fsType = "ext4";
-    options = [
-      "users" # Allows any user to mount and unmount
-      "nofail" # Prevent system from failing if this drive doesn't mount
-      "x-gvfs-show"
-    ];
-  };
+  # fileSystems."/mnt/arch-home" = {
+  #   device = "/dev/disk/by-uuid/fbce7138-5767-4deb-813a-13a63065340e";
+  #   fsType = "ext4";
+  #   options = [
+  #     "users" # Allows any user to mount and unmount
+  #     "nofail" # Prevent system from failing if this drive doesn't mount
+  #     "x-gvfs-show"
+  #   ];
+  # };
 
-  fileSystems."/mnt/ice" = {
-    device = "/dev/disk/by-uuid/09b98b66-2799-4ea7-a77d-830fe3341bd1";
-    fsType = "ext4";
-    options = [
-      "users" # Allows any user to mount and unmount
-      "nofail" # Prevent system from failing if this drive doesn't mount
-      "x-gvfs-show"
-    ];
-  };
+  # fileSystems."/mnt/ice" = {
+  #   device = "/dev/disk/by-uuid/09b98b66-2799-4ea7-a77d-830fe3341bd1";
+  #   fsType = "ext4";
+  #   options = [
+  #     "users" # Allows any user to mount and unmount
+  #     "nofail" # Prevent system from failing if this drive doesn't mount
+  #     "x-gvfs-show"
+  #   ];
+  # };
 
-  fileSystems."/mnt/arch-root" = {
-    device = "/dev/disk/by-uuid/1dd01183-da7b-44cc-ba8b-691b7aa995f1";
-    fsType = "ext4";
-    options = [
-      "users" # Allows any user to mount and unmount
-      "nofail" # Prevent system from failing if this drive doesn't mount
-      "x-gvfs-show"
-    ];
-  };
-  swapDevices = [
-    {
-      device = "/dev/disk/by-uuid/4eebb7e2-67c1-4e47-8f2c-7342ed054296";
-    }
-  ];
+  # fileSystems."/mnt/arch-root" = {
+  #   device = "/dev/disk/by-uuid/1dd01183-da7b-44cc-ba8b-691b7aa995f1";
+  #   fsType = "ext4";
+  #   options = [
+  #     "users" # Allows any user to mount and unmount
+  #     "nofail" # Prevent system from failing if this drive doesn't mount
+  #     "x-gvfs-show"
+  #   ];
+  # };
+  # swapDevices = [
+  #   {
+  #     device = "/dev/disk/by-uuid/4eebb7e2-67c1-4e47-8f2c-7342ed054296";
+  #   }
+  # ];
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";

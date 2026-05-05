@@ -35,10 +35,10 @@ if status is-interactive
 end
 
 # Created by `pipx` on 2025-10-19 14:49:23
-set PATH $PATH /home/end/.local/bin
-set -x PYENV_ROOT $HOME/.pyenv
-set -x PATH $PYENV_ROOT/bin $PATH
-pyenv init - | source
+# set PATH $PATH /home/end/.local/bin
+# set -x PYENV_ROOT $HOME/.pyenv
+# set -x PATH $PYENV_ROOT/bin $PATH
+# pyenv init - | source
 
 set -gx SOPS_AGE_KEY_FILE "$HOME/.age/key.txt"
 load_secrets
@@ -47,7 +47,7 @@ load_secrets
 # fish_add_path -g -p ~/develop/flutter/bin
 # fish_add_path -g -p ~/develop/android-studio/bin
 
-fish_add_path -g -p ~/.config/emacs/bin
+# fish_add_path -g -p ~/.config/emacs/bin
 fish_add_path --prepend --move ~/.local/share/pnpm
 
 # pnpm
