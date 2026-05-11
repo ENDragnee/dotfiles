@@ -9,6 +9,8 @@
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
     inputs.niri.homeModules.niri
+    inputs.nixvim.homeModules.nixvim
+    desktop/configs/nvim/default.nix
   ];
   home.username = "end";
   home.homeDirectory = "/home/end";
@@ -30,6 +32,7 @@
     picard
     linux-wifi-hotspot
     qalculate-gtk
+    eloquent
 
     # archives
     zip

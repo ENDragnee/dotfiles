@@ -184,6 +184,7 @@
   services.libinput.enable = true;
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.sddm.enableGnomeKeyring = true;
+  services.languagetool.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.end = {
@@ -245,9 +246,16 @@
       pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-gtk
     ];
-    config.common.default = ["gtk"];
-    config.niri.default = ["gnome" "gtk"];
+    config = {
+      common = {
+        default = ["gtk"];
+      };
+      niri = {
+        default = ["gnome" "gtk"];
+      };
+    };
   };
+  services.dbus.packages = [pkgs.dconf];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
