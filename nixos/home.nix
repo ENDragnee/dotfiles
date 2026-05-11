@@ -4,13 +4,14 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
     inputs.niri.homeModules.niri
-    inputs.nixvim.homeModules.nixvim
-    desktop/configs/nvim/default.nix
+    inputs.nix4nvchad.homeManagerModule
+    ./desktop/configs/nvim/nvchad.nix
   ];
   home.username = "end";
   home.homeDirectory = "/home/end";
@@ -26,14 +27,12 @@
     ncdu
     btdu
     gnuchess
-    # home-manager
     ani-cli
     xterm
     picard
     linux-wifi-hotspot
     qalculate-gtk
     eloquent
-
     # archives
     zip
     xz
@@ -47,6 +46,7 @@
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
     sops
+    openssl
 
     # networking tools
     mtr # A network diagnostic tool
@@ -146,8 +146,6 @@
     pyenv
     stylua
     gemini-cli
-    # prettier
-    # prettierd
 
     #fonts
     nerd-fonts.hack
@@ -174,7 +172,6 @@
   ];
   fonts.fontconfig.enable = true;
 
-  # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
     settings = {
@@ -201,20 +198,20 @@
   };
   gtk = {
     enable = true;
-    # theme = {
-    #   name = "Gruvbox-Dark";
-    #   package = pkgs.gruvbox-dark-gtk;
-    # };
     iconTheme = {
       name = "oomox-gruvbox-dark";
       package = pkgs.gruvbox-dark-icons-gtk;
     };
     font = {
-      name = "FiraCode Nerd Font 12"; # Family name and size
-      package = pkgs.nerd-fonts.fira-mono; # Package containing the font
+      name = "FiraCode Nerd Font 12";
+      package = pkgs.nerd-fonts.fira-mono;
     };
-    gtk3.extraConfig = {gtk-application-prefer-dark-theme = 1;};
-    gtk4.extraConfig = {gtk-application-prefer-dark-theme = 1;};
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
   };
   qt = {
     enable = true;
@@ -222,14 +219,15 @@
     style.name = "kvantum";
   };
 
-  # alacritty - a cross-platform, GPU-accelerated terminal emulator
   programs.alacritty = {
     enable = true;
-    # custom settings
     settings = {
       terminal.shell = {
         program = "${pkgs.zellij}/bin/zellij";
-        args = ["attach" "-c"];
+        args = [
+          "attach"
+          "-c"
+        ];
       };
 
       env.TERM = "xterm-256color";
@@ -242,28 +240,18 @@
   };
   programs.dank-material-shell = {
     enable = true;
-    dgop.package = inputs.dgop.packages.${pkgs.system}.default;
+    dgop.package = inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default;
     systemd = {
-      enable = true; # Systemd service for auto-start
-      restartIfChanged = true; # Auto-restart dms.service when dank-material-shell changes
+      enable = true;
+      restartIfChanged = true;
     };
-    # Core features
-    enableSystemMonitoring = true; # System monitoring widgets (dgop)
-    enableVPN = true; # VPN management widget
-    enableDynamicTheming = true; # Wallpaper-based theming (matugen)
-    enableAudioWavelength = true; # Audio visualizer (cava)
-    enableCalendarEvents = true; # Calendar integration (khal)
-    enableClipboardPaste = true; # Pasting items from the clipboard (wtype)
+    enableSystemMonitoring = true;
+    enableVPN = true;
+    enableDynamicTheming = true;
+    enableAudioWavelength = true;
+    enableCalendarEvents = true;
+    enableClipboardPaste = true;
 
-    #    settings = {
-    #      theme = "dark";
-    #      dynamicTheming = true;
-    #    };
-    #
-    #    session = {
-    #      isLightMode = false;
-    #    };
-    #
     clipboardSettings = {
       maxHistory = 25;
       maxEntrySize = 5242880;
@@ -274,11 +262,11 @@
       disablePersist = true;
     };
     niri = {
-      enableKeybinds = true; # Set to true to use DMS binds alongside yours:
+      enableKeybinds = true;
       includes = {
-        enable = true; # LEAVE THIS ENABLED
-        override = true; # LEAVE THIS TRUE (So DMS settings override your base config)
-        originalFileName = "base"; # DMS will use this name for your base config
+        enable = true;
+        override = true;
+        originalFileName = "base";
         filesToInclude = [
           "../custom"
           "alttab"
@@ -295,12 +283,9 @@
     };
   };
   xdg.configFile."niri/custom.kdl".source = ./niri-config.kdl;
-  # programs.home-manager.enable = true;
+
   home.sessionVariables = {
-    # QT_STYLE_OVERRIDE = "kvantum";
-    # QT_QPA_PLATFORMTHEME = "qt5ct";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    # QT_QPA_PLATFORMTHEME = "kvantum";
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
     TERM = "xterm-256color";
@@ -314,7 +299,6 @@
     "XTerm*saveLines" = "4096";
     "XTerm*charClass" = "33:48,35:48,37:48,43:48,45-47:48,58:48,61:48,63:48,64:48,95:48,126:48";
 
-    # Gruvbox Dark Colors
     "XTerm*background" = "#282828";
     "XTerm*foreground" = "#ebdbb2";
     "XTerm*cursorColor" = "#ebdbb2";

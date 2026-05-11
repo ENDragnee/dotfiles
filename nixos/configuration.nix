@@ -6,7 +6,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -26,7 +27,7 @@
       themePackages = with pkgs; [
         # By default we would install all themes
         (adi1090x-plymouth-themes.override {
-          selected_themes = ["darth_vader"];
+          selected_themes = [ "darth_vader" ];
         })
       ];
     };
@@ -66,7 +67,10 @@
     };
     openFirewall = true;
   };
-
+  nix.settings = {
+    substituters = [ "https://niri.cachix.org" ];
+    trusted-public-keys = [ "niri.cachix.org-1:Wv0Om607ZpInqlal9Q/3uH5N8vXn9I3m0kS89n0I3G0=" ];
+  };
   services.fstrim.enable = true;
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
@@ -82,7 +86,7 @@
   # Set your time zone.
   time.timeZone = "Africa/Addis_Ababa";
   nixpkgs.config.allowUnfree = true;
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -189,7 +193,14 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.end = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "video" "power" "docker" "libvirtd"]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+      "power"
+      "docker"
+      "libvirtd"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
@@ -239,7 +250,10 @@
   ];
 
   virtualisation.docker.enable = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   xdg.portal = {
     enable = true;
     extraPortals = [
@@ -248,14 +262,17 @@
     ];
     config = {
       common = {
-        default = ["gtk"];
+        default = [ "gtk" ];
       };
       niri = {
-        default = ["gnome" "gtk"];
+        default = [
+          "gnome"
+          "gtk"
+        ];
       };
     };
   };
-  services.dbus.packages = [pkgs.dconf];
+  services.dbus.packages = [ pkgs.dconf ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -270,9 +287,15 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [22 22000];
-  networking.firewall.trustedInterfaces = ["virbr0"];
-  networking.firewall.allowedUDPPorts = [21027 22000];
+  networking.firewall.allowedTCPPorts = [
+    22
+    22000
+  ];
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
+  networking.firewall.allowedUDPPorts = [
+    21027
+    22000
+  ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
 

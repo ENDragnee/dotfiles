@@ -1,115 +1,209 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
-  programs.nixvim = {
-    # 1. Provide nvim-tree using Nixvim's native module
-    plugins.nvim-tree = {
-      enable = true;
-      filters.dotfiles = false;
-      disableNetrw = true;
-      hijackCursor = true;
-      syncRootWithCwd = true;
-      updateFocusedFile.enable = true;
-      view = {
-        width = 30;
-        preserveWindowProportions = true;
-      };
-      renderer = {
-        rootFolderLabel = false;
-        highlightGit = true;
-        indentMarkers.enable = true;
-        icons = {
-          show = {
-            file = true;
-            folder = true;
-            folderArrow = true;
-            git = true;
-          };
-        };
-      };
-    };
+  programs.nvchad = {
+    enable = true;
 
-    plugins.web-devicons.enable = true;
+    extraPackages = with pkgs; [
+      # PHP / Laravel
+      php84
+      php84Packages.composer
+      nodePackages.intelephense
+      blade-formatter
 
-    # 2. Fetch NvChad Core, Base46, UI, and Volt exactly from your lazy.lock
-    extraPlugins =[
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "NvChad";
-        src = pkgs.fetchFromGitHub {
-          owner = "NvChad";
-          repo = "NvChad";
-          rev = "d042cc975247c2aa55fcb228e5d146dc1dc6c648"; # From lazy.lock
-          hash = ""; # Let Nix output the expected hash, then paste here
-        };
-      })
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "base46";
-        src = pkgs.fetchFromGitHub {
-          owner = "NvChad";
-          repo = "base46";
-          rev = "884b990dcdbe07520a0892da6ba3e8d202b46337"; # From lazy.lock
-          hash = ""; # Let Nix output the expected hash
-        };
-      })
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "ui";
-        src = pkgs.fetchFromGitHub {
-          owner = "NvChad";
-          repo = "ui";
-          rev = "cb75908a86720172594b30de147272c1b3a7f452"; # From lazy.lock
-          hash = ""; # Let Nix output the expected hash
-        };
-      })
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "volt";
-        src = pkgs.fetchFromGitHub {
-          owner = "NvChad";
-          repo = "volt";
-          rev = "620de1321f275ec9d80028c68d1b88b409c0c8b1"; # From lazy.lock
-          hash = ""; # Let Nix output the expected hash
-        };
-      })
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "minty";
-        src = pkgs.fetchFromGitHub {
-          owner = "NvChad";
-          repo = "minty";
-          rev = "aafc9e8e0afe6bf57580858a2849578d8d8db9e0"; # From lazy.lock
-          hash = ""; # Let Nix output the expected hash
-        };
-      })
+      # Web / Frontend
+      nodePackages.typescript-language-server
+      nodePackages.vscode-langservers-extracted
+      nodePackages.tailwindcss
+      nodePackages.prettier
+      prettierd
+      eslint_d
+      vue-language-server
+
+      # Python
+      black
+      python313Packages.python-lsp-server
+      python313Packages.debugpy
+
+      # Shell / Lua / Nix
+      nodePackages.bash-language-server
+      stylua
+      nil
+
+      # Go
+      go
+      gopls
+      golangci-lint
+      go-tools
+
+      # Prisma
+      prisma-language-server
+
+      # Utils
+      ripgrep
+      fd
+      wl-clipboard
+      lldb
     ];
 
-    # 3. Simulate your chadrc.lua and bootstrap the themes
-    extraConfigLuaPre = ''
-      -- Replicate your chadrc.lua
-      package.loaded["chadrc"] = {
-          base46 = {
-              theme = "gruvbox",
-          }
+    extraPlugins = ''
+      return {
+        { "mg979/vim-visual-multi" },
+
+        { "mfussenegger/nvim-dap" },
+
+        {
+          "rcarriga/nvim-dap-ui",
+          dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-neotest/nvim-nio",
+          },
+          config = function()
+            require("dapui").setup()
+          end,
+        },
+
+        { "mfussenegger/nvim-dap-python" },
+
+        {
+          "nvim-telescope/telescope-project.nvim",
+          config = function()
+            require("telescope").load_extension("project")
+          end,
+        },
+
+        { "stevearc/conform.nvim" },
+
+        { "zbirenbaum/copilot.lua" },
+        { "CopilotC-Nvim/CopilotChat.nvim", branch = "main" },
+
+        {
+          "adalessa/laravel.nvim",
+          ft = { "php", "blade" },
+        },
+
+        {
+          "mattn/emmet-vim",
+          ft = { "html", "css", "blade" },
+        },
+
+        { "carlos-algms/agentic.nvim" },
+        { "hakonharnes/img-clip.nvim" },
       }
     '';
 
-    extraConfigLua = ''
-      local base46_cache = vim.fn.stdpath("data") .. "/base46/"
-      
-      -- Compile base46 if it hasn't been compiled yet
-      if not vim.loop.fs_stat(base46_cache) then
-          require("base46").compile()
-      end
-      
-      -- Load the theme defaults and statusline
-      dofile(base46_cache .. "defaults")
-      dofile(base46_cache .. "statusline")
-      
-      -- Load NvChad Autocmds (which handles resizing, terminal behaviors, etc)
-      require("nvchad.autocmds")
-      
-      -- Setup UI elements (Statusline, Tabufline)
-      require("nvconfig").ui = {
-          statusline = { theme = "default" },
-          tabufline = { enabled = true },
-      }
+    extraConfig = ''
+      vim.g.mapleader = " "
+
+      vim.opt.number = true
+      vim.opt.relativenumber = true
+      vim.opt.expandtab = true
+      vim.opt.shiftwidth = 2
+      vim.opt.tabstop = 2
+
+      ------------------------------------------------------------------
+      -- LSP
+      ------------------------------------------------------------------
+
+      vim.schedule(function()
+        local lsp = require("nvchad.configs.lspconfig")
+
+        local function setup_server(server, config)
+          config = config or {}
+          config.on_attach = config.on_attach or lsp.on_attach
+          config.on_init = config.on_init or lsp.on_init
+          config.capabilities = config.capabilities or lsp.capabilities
+
+          vim.lsp.config(server, config)
+          vim.lsp.enable(server)
+        end
+
+        setup_server("html")
+        setup_server("cssls")
+        setup_server("bashls")
+        setup_server("nil_ls")
+        setup_server("pylsp")
+        setup_server("intelephense")
+
+        setup_server("clangd", {
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+            "--header-insertion=iwyu",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--fallback-style=llvm",
+            -- CRITICAL: This allows clangd to query the nix-provided gcc/clang for system headers
+            "--query-driver=/nix/store/*/*/bin/gcc,/nix/store/*/*/bin/clang,/nix/store/*/*/bin/g++"
+          },
+        })
+        setup_server("gopls")
+        setup_server("ts_ls")
+        setup_server("prismals")
+
+      end)
+
+      ------------------------------------------------------------------
+      -- TREESITTER (DO NOT INSTALL PLUGIN HERE IN NVCHAD NIX)
+      ------------------------------------------------------------------
+
+      vim.schedule(function()
+        local ok, ts = pcall(require, "nvim-treesitter.configs")
+
+        if ok then
+          ts.setup({
+            ensure_installed = {
+              "lua",
+              "vim",
+              "bash",
+              "html",
+              "css",
+              "javascript",
+              "typescript",
+              "tsx",
+              "vue",
+              "json",
+              "yaml",
+              "python",
+              "php",
+              "markdown",
+
+              "c",
+              "cpp",
+              "go",
+              "gomod",
+              "prisma"
+            },
+
+            highlight = { enable = true },
+            indent = { enable = true },
+          })
+        end
+      end)
+
+      ------------------------------------------------------------------
+      -- FORMATTER
+      ------------------------------------------------------------------
+
+      require("conform").setup({
+        formatters_by_ft = {
+          lua = { "stylua" },
+          php = { "pint" },
+          python = { "black" },
+          javascript = { "prettierd" },
+          typescript = { "prettierd" },
+          vue = { "prettierd" },
+          html = { "prettierd" },
+          css = { "prettierd" },
+
+          c = { "clang_format" },
+          cpp = { "clang_format" },
+          go = { "gofmt" },
+
+          prisma = { "prettierd" },
+        },
+      })
     '';
   };
 }
