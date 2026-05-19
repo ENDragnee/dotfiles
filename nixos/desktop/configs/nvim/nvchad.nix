@@ -12,13 +12,16 @@
       blade-formatter
 
       # Web / Frontend
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted
-      nodePackages.tailwindcss
-      nodePackages.prettier
+      typescript-language-server
+      typescript
+      vscode-langservers-extracted
+      tailwindcss
+      prettier
       prettierd
       eslint_d
       vue-language-server
+      astro-language-server
+      tailwindcss-language-server
 
       # Python
       black
@@ -35,6 +38,10 @@
       gopls
       golangci-lint
       go-tools
+
+      #C and C++
+      clang
+      clang-tools
 
       # Prisma
       prisma-language-server
@@ -102,6 +109,22 @@
       vim.opt.tabstop = 2
 
       ------------------------------------------------------------------
+      -- SILENCE NOTIFICATIONS
+      ------------------------------------------------------------------
+      -- This intercepts messages before they are printed and completely
+      -- hides the annoying signatureHelp error.
+      vim.notify = (function()
+        local old_notify = vim.notify
+        return function(msg, level, opts)
+          if msg and type(msg) == "string" and msg:find("textDocument/signatureHelp is not supported") then
+            return
+          end
+          -- Pass everything else through normally
+          old_notify(msg, level, opts)
+        end
+      end)()
+
+      ------------------------------------------------------------------
       -- LSP
       ------------------------------------------------------------------
 
@@ -120,11 +143,11 @@
 
         setup_server("html")
         setup_server("cssls")
+        setup_server("tailwindcss")
         setup_server("bashls")
         setup_server("nil_ls")
         setup_server("pylsp")
         setup_server("intelephense")
-
         setup_server("clangd", {
           cmd = {
             "clangd",
@@ -134,13 +157,35 @@
             "--completion-style=detailed",
             "--function-arg-placeholders",
             "--fallback-style=llvm",
-            -- CRITICAL: This allows clangd to query the nix-provided gcc/clang for system headers
-            "--query-driver=/nix/store/*/*/bin/gcc,/nix/store/*/*/bin/clang,/nix/store/*/*/bin/g++"
+            -- Use Nix interpolation to point to the actual wrapped binaries
+            "--query-driver=${pkgs.stdenv.cc}/bin/cc,${pkgs.stdenv.cc}/bin/gcc,${pkgs.clang}/bin/clang,${pkgs.clang}/bin/clang++"
           },
         })
         setup_server("gopls")
-        setup_server("ts_ls")
         setup_server("prismals")
+        setup_server("ts_ls", {
+          filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+        })
+
+        setup_server("vue_ls", {
+          init_options = {
+            typescript = {
+              tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib",
+            },
+            vue = {
+              hybridMode = false,
+            },
+          },
+          filetypes = { "vue" },
+        })
+
+        setup_server("astro", {
+          init_options = {
+            typescript = {
+              tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib",
+            },
+          },
+        })
 
       end)
 
@@ -163,6 +208,7 @@
               "typescript",
               "tsx",
               "vue",
+              "astro",
               "json",
               "yaml",
               "python",
@@ -173,7 +219,8 @@
               "cpp",
               "go",
               "gomod",
-              "prisma"
+              "prisma",
+              "tailwindcss"
             },
 
             highlight = { enable = true },
@@ -201,9 +248,45 @@
           cpp = { "clang_format" },
           go = { "gofmt" },
 
-          prisma = { "prettierd" },
+          -- I REMOVED prisma = { "prismals" } HERE.
+          -- Because lsp_fallback = true is set below, Conform will automatically
+          -- find and use the Prisma Language Server to format without needing it defined.
+        },
+
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_fallback = true,
         },
       })
+      ------------------------------------------------------------------
+      -- MAPPINGS
+      ------------------------------------------------------------------
+      local map = vim.keymap.set
+
+      -- General
+      map("n", ";", ":", { desc = "CMD enter command mode" })
+      map("i", "jk", "<ESC>")
+
+      -- Telescope
+      map("n", "<A-p>", "<cmd> Telescope project <cr>", { desc = "Projects" })
+      map("n", "<A-l>", "<cmd> Telescope terms <cr>", { desc = "Toggle hidden terminals" })
+
+      -- Copilot
+      map("i", "<C-/>", function()
+        require("copilot.suggestion").accept_line()
+      end, { desc = "Copilot Accept Line" })
+
+      -- LSP
+      map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+      map("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+
+      -- DAP
+      map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Dap Toggle Breakpoint" })
+      map("n", "<leader>dr", function() require("dap").continue() end, { desc = "Dap Start/Continue" })
+      map("n", "<leader>di", function() require("dap").step_into() end, { desc = "Dap Step Into" })
+      map("n", "<leader>do", function() require("dap").step_over() end, { desc = "Dap Step Over" })
+      map("n", "<leader>dt", function() require("dap").terminate() end, { desc = "Dap Terminate" })
+      map("n", "<leader>du", function() require("dapui").toggle() end, { desc = "Toggle DAP UI" })
     '';
   };
 }

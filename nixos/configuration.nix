@@ -78,8 +78,15 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "iced"; # Define your hostname.
+  networking.hostName = "iced"; # Define your hostname.networking
 
+  networking.hosts = {
+    "127.0.0.1" = [
+      "rule34.xxx"
+      "rule34videos.com"
+      "pornhub.com"
+    ];
+  };
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
 
@@ -290,6 +297,7 @@
   networking.firewall.allowedTCPPorts = [
     22
     22000
+    4321
   ];
   networking.firewall.trustedInterfaces = [ "virbr0" ];
   networking.firewall.allowedUDPPorts = [
