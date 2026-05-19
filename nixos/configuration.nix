@@ -188,7 +188,7 @@ in
     settings = {
       Theme = {
         Current = "sddm-astronaut-theme";
-        CursorTheme = "Bibata-Modern-Ice";
+        CursorTheme = "Bibata-Modern-Classic";
         CursorSize = 24;
       };
     };

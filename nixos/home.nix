@@ -47,6 +47,7 @@
     fzf # A command-line fuzzy finder
     sops
     openssl
+    wl-clipboard
 
     # networking tools
     mtr # A network diagnostic tool
@@ -253,20 +254,20 @@
     enableClipboardPaste = true;
 
     clipboardSettings = {
-      maxHistory = 25;
+      maxHistory = 1000;
       maxEntrySize = 5242880;
       autoClearDays = 1;
-      clearAtStartup = true;
+      clearAtStartup = false;
       disabled = false;
       disableHistory = false;
       disablePersist = true;
     };
     niri = {
-      enableKeybinds = true;
+      enableKeybinds = false;
       includes = {
         enable = true;
         override = true;
-        originalFileName = "base";
+        # originalFileName = "base";
         filesToInclude = [
           "../custom"
           "alttab"
@@ -282,7 +283,7 @@
       };
     };
   };
-  xdg.configFile."niri/custom.kdl".source = ./niri-config.kdl;
+  xdg.configFile."niri/custom.kdl".source = ./desktop/configs/niri/my-config.kdl;
 
   home.sessionVariables = {
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
