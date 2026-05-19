@@ -7,6 +7,11 @@
   pkgs,
   ...
 }:
+let
+  custom-sddm-astronaut = pkgs.sddm-astronaut.override {
+    embeddedTheme = "japanese_aesthetic";
+  };
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -179,6 +184,16 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    theme = "sddm-astronaut-theme";
+    settings = {
+      Theme = {
+        Current = "sddm-astronaut-theme";
+        CursorTheme = "Bibata-Modern-Ice";
+        CursorSize = 24;
+      };
+    };
+    # Provide the theme to SDDM
+    extraPackages = with pkgs; [ custom-sddm-astronaut ];
   };
   services.asusd = {
     enable = true;
@@ -254,6 +269,8 @@
     nettools
     seahorse
     virt-viewer
+    custom-sddm-astronaut
+    kdePackages.qtmultimedia
   ];
 
   virtualisation.docker.enable = true;
