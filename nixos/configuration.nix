@@ -73,8 +73,19 @@ in
     openFirewall = true;
   };
   nix.settings = {
-    substituters = [ "https://niri.cachix.org" ];
-    trusted-public-keys = [ "niri.cachix.org-1:Wv0Om607ZpInqlal9Q/3uH5N8vXn9I3m0kS89n0I3G0=" ];
+    substituters = [
+      "https://cache.nixos.org"
+      "https://niri.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+    ];
+    trusted-users = [
+      "root"
+      "end"
+    ];
+
   };
   services.fstrim.enable = true;
   hardware.bluetooth.enable = true;

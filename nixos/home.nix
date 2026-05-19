@@ -239,6 +239,7 @@
       selection.save_to_clipboard = true;
     };
   };
+  programs.niri.settings.binds = lib.mkForce { };
   programs.dank-material-shell = {
     enable = true;
     dgop.package = inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default;
