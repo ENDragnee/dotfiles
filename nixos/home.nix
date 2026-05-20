@@ -127,6 +127,8 @@
     gnome-disk-utility
     qbittorrent
     polkit_gnome
+    grim
+    slurp
 
     #dev tools
     nodejs_24
@@ -189,6 +191,12 @@
     nix-direnv.enable = true;
     enableFishIntegration = true;
   };
+  xdg.configFile."flameshot/flameshot.ini".text = ''
+    [General]
+    disabledTrayIcon=false
+    showStartupLaunchMessage=false
+    useGrimAdapter=true
+  '';
 
   home.pointerCursor = {
     name = "Bibata-Modern-Classic";
