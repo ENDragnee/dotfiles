@@ -91,7 +91,7 @@
 
         {
           "mattn/emmet-vim",
-          ft = { "html", "css", "blade" },
+          ft = { "html", "css", "blade", "ejs" },
         },
 
         { "carlos-algms/agentic.nvim" },
@@ -107,6 +107,11 @@
       vim.opt.expandtab = true
       vim.opt.shiftwidth = 2
       vim.opt.tabstop = 2
+      vim.filetype.add({
+        extension = {
+          ejs = "html",
+        },
+      })
 
       ------------------------------------------------------------------
       -- SILENCE NOTIFICATIONS
@@ -141,7 +146,9 @@
           vim.lsp.enable(server)
         end
 
-        setup_server("html")
+        setup_server("html", {
+          filetypes = {"html", "ejs"},
+          })
         setup_server("cssls")
         setup_server("tailwindcss")
         setup_server("bashls")
@@ -214,6 +221,7 @@
               "python",
               "php",
               "markdown",
+              "embedded_template",
 
               "c",
               "cpp",
@@ -243,6 +251,7 @@
           vue = { "prettierd" },
           html = { "prettierd" },
           css = { "prettierd" },
+          ejs = { "prettierd" },
 
           c = { "clang_format" },
           cpp = { "clang_format" },

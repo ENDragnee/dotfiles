@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 {
   home.packages = with pkgs; [
     fastfetch
@@ -78,7 +82,7 @@
     #my apps
     vlc
     veracrypt
-    spicetify-cli
+    # spicetify-cli
     alacritty
     gparted
     nemo-with-extensions
@@ -90,7 +94,7 @@
     pwvucontrol
     qpwgraph
     lxappearance
-    spotify
+    # spotify
     dwt1-shell-color-scripts
     ghostty
     xdg-utils

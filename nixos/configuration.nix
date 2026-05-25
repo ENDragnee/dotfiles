@@ -326,7 +326,27 @@ in
     22
     22000
     4321
+    8006
   ];
+
+  systemd.services.vm-port-forward = {
+    description = "Forward external port 8006 to libvirt VM Proxmox API";
+    after = [
+      "network.target"
+      "libvirtd.service"
+    ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd 192.168.122.117:8006";
+      Restart = "always";
+    };
+  };
+
+  systemd.sockets.vm-port-forward = {
+    description = "Socket for VM Port Forwarding";
+    listenStreams = [ "0.0.0.0:8006" ]; # Listens on all interfaces including wlp3s0
+    wantedBy = [ "sockets.target" ];
+  };
   networking.firewall.trustedInterfaces = [ "virbr0" ];
   networking.firewall.allowedUDPPorts = [
     21027
