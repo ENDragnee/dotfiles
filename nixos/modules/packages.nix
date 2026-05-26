@@ -64,6 +64,7 @@
     nethogs
     stockfish
     syncthing
+    bulky
 
     # system call monitoring
     strace # system call monitoring
