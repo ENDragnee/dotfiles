@@ -135,7 +135,7 @@
         program = "${pkgs.zellij}/bin/zellij";
         args = [
           "attach"
-          "-c"
+          "undulating-duck"
         ];
       };
 
