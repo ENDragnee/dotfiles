@@ -221,7 +221,7 @@ in
   services.libinput.enable = true;
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.sddm.enableGnomeKeyring = true;
-  services.languagetool.enable = true;
+  # services.languagetool.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.end = {
@@ -272,7 +272,7 @@ in
     git
     neovim
     asusctl
-    nvtopPackages.full
+    # nvtopPackages.full
     dnsmasq
     adwaita-icon-theme
     glib

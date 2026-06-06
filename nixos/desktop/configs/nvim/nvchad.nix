@@ -6,9 +6,9 @@
 
     extraPackages = with pkgs; [
       # PHP / Laravel
-      php84
-      php84Packages.composer
-      nodePackages.intelephense
+      php85
+      php85Packages.composer
+      intelephense
       blade-formatter
 
       # Web / Frontend
@@ -29,7 +29,7 @@
       python313Packages.debugpy
 
       # Shell / Lua / Nix
-      nodePackages.bash-language-server
+      bash-language-server
       stylua
       nil
 
