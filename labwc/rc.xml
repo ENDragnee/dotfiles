@@ -39,31 +39,31 @@
     <keepBorder>yes</keepBorder>
     <dropShadows>no</dropShadows>
     <font place="ActiveWindow">
-      <name>FantasqueSansM Nerd Font Propo</name>
+      <name>FiraCode Nerd Font</name>
       <size>12</size>
       <slant>normal</slant>
       <weight>normal</weight>
     </font>
     <font place="InactiveWindow">
-      <name>FantasqueSansM Nerd Font Propo</name>
+      <name>FiraCode Nerd Font</name>
       <size>12</size>
       <slant>normal</slant>
       <weight>normal</weight>
     </font>
     <font place="MenuHeader">
-      <name>FantasqueSansM Nerd Font Propo</name>
+      <name>FiraCode Nerd Font</name>
       <size>12</size>
       <slant>normal</slant>
       <weight>normal</weight>
     </font>
     <font place="MenuItem">
-      <name>FantasqueSansM Nerd Font Propo</name>
+      <name>FiraCode Nerd Font</name>
       <size>12</size>
       <slant>normal</slant>
       <weight>normal</weight>
     </font>
     <font place="OnScreenDisplay">
-      <name>FantasqueSansM Nerd Font Propo</name>
+      <name>FiraCode Nerd Font</name>
       <size>12</size>
       <slant>normal</slant>
       <weight>normal</weight>
@@ -163,15 +163,15 @@
   <desktops>
     <popupTime>1000</popupTime>
     <names>
-      <name>  </name>
-      <name>   </name>
-      <name>  </name>
-      <name>  </name>
-      <name>  </name> 
-      <name>  </name>
-      <name>  </name>
-      <name>  </name>
-      <name>  </name>
+      <name></name>
+      <name></name>
+      <name></name>
+      <name></name>
+      <name></name> 
+      <name></name>
+      <name></name>
+      <name></name>
+      <name></name>
     </names>
   </desktops>
 
@@ -223,10 +223,10 @@
     <layoutScope>global</layoutScope>
     <repeatRate>25</repeatRate>
     <repeatDelay>600</repeatDelay>
-    <keybind key="C-A-Left">
+    <keybind key="C-A-Up">
       <action name="GoToDesktop" to="left" wrap="yes" />
     </keybind>
-    <keybind key="C-A-Right">
+    <keybind key="C-A-Down">
       <action name="GoToDesktop" to="right" wrap="yes" />
     </keybind>
     <keybind key="W-1">
@@ -304,31 +304,31 @@
     <keybind key="A-S-Tab">
       <action name="PreviousWindow" />
     </keybind>
-    <keybind key="C-A-Up">
+    <keybind key="C-A-Right">
       <action name="NextWindow" workspace="current" output="all" identifier="all"/>
     </keybind>
-    <keybind key="C-A-Down">
+    <keybind key="C-A-Left">
       <action name="PreviousWindow" workspace="current" output="all" identifier="all"/>
     </keybind>
 
 
     <keybind key="W-o">
-      <action name="Execute" command="~/.config/rofi/launchers/type-2/launcher.sh" />
+      <action name="Execute" command="dms ipc call launcher open" />
     </keybind>
     <keybind key="W-S-a">
-      <action name="Execute" command="clipcat-menu" />
+      <action name="Execute" command="dms ipc call clipboard open" />
     </keybind>
     <keybind key="W-.">
       <action name="Execute" command="rofi -show emoji -emoji-format '{emoji}' -modi emoji -theme '~/.config/rofi/emoji/style-8.rasi'" />
     </keybind>
     <keybind key="W-q">
-      <action name="Execute" command="wlogout -s" />
+      <action name="Execute" command="dms ipc call powermenu open" />
     </keybind>
     <keybind key="W-S-f">
       <action name="Execute" command="nemo" />
     </keybind>
     <keybind key="W-S-b">
-      <action name="Execute" command="zen-browser"/>
+      <action name="Execute" command="zen"/>
     </keybind>
     <keybind key="W-C-b">
       <action name="Execute" command="brave"/>
@@ -339,18 +339,17 @@
     <keybind key="W-Return">
       <action name="Execute" command="alacritty" />
     </keybind>
-    <!-- <keybind key="W-q">
-      <action name="Execute" command="archlinux-logout" />
-      </keybind>
-    -->
+    <keybind key="W-A-Return">
+      <action name="Execute" command="ghostty" />
+    </keybind>
     <keybind key="W-v">
       <action name="Execute" command="pwvucontrol" />
     </keybind>
     <keybind key="W-S-m">
-      <action name="Execute" command="flatpak --user run com.github.taiko2k.tauonmb" />
+      <action name="Execute" command="flatpak run com.github.taiko2k.tauonmb" />
     </keybind>
     <keybind key="W-A-m">
-      <action name="Execute" command="launch_spotify.sh" />
+      <action name="Execute" command="spotify" />
     </keybind>
     <keybind key="A-F3">
       <action name="Execute" command="bemenu-run" />
@@ -358,9 +357,9 @@
     <keybind key="W-v">
       <action name="Execute" command="pavucontrol"/>
     </keybind>
-    <keybind key="W-b">
-      <action name="Execute" command="toggle_bar.sh"/>
-    </keybind>
+    <!-- <keybind key="W-b"> -->
+    <!--   <action name="Execute" command="toggle_bar.sh"/> -->
+    <!-- </keybind> -->
     <keybind key="W-x">
       <action name="Execute" command="hyprpicker -a -n"/>
     </keybind>
@@ -404,19 +403,19 @@
       <action name="ShowMenu" menu="client-menu" atCursor="no" />
     </keybind>
     <keybind key="XF86_AudioLowerVolume">
-      <action name="Execute" command="amixer sset Master 5%-" />
+      <action name="Execute" command="dms ipc audio decrement '5'" />
     </keybind>
     <keybind key="XF86_AudioRaiseVolume">
-      <action name="Execute" command="amixer sset Master 5%+" />
+      <action name="Execute" command="dms ipc audio increment '5'" />
     </keybind>
     <keybind key="XF86_AudioMute">
-      <action name="Execute" command="amixer sset Master toggle" />
+      <action name="Execute" command="dms ipc audio mute" />
     </keybind>
     <keybind key="XF86_MonBrightnessUp">
-      <action name="Execute" command="brightnessctl set +10%" />
+      <action name="Execute" command="dms ipc brightness increment '10' 'backlight:amdgpu_bl2'"/>
     </keybind>
     <keybind key="XF86_MonBrightnessDown">
-      <action name="Execute" command="brightnessctl set 10%-" />
+      <action name="Execute" command="dms ipc brightness decrement '10' 'backlight:amdgpu_bl2'" />
     </keybind>
   <!-- SnapToRegion via W-Numpad -->
   <!--
@@ -603,10 +602,10 @@
     </context>
 
     <context name="All">
-      <mousebind direction="W-Down" action="Scroll">
+      <mousebind direction="W-Up" action="Scroll">
         <action name="GoToDesktop" to="left" wrap="yes" />
       </mousebind>
-      <mousebind direction="W-Up" action="Scroll">
+      <mousebind direction="W-Down" action="Scroll">
         <action name="GoToDesktop" to="right" wrap="yes" />
       </mousebind>
     </context>
