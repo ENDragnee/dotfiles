@@ -249,6 +249,8 @@ in
   programs.niri = {
     enable = true;
   };
+  programs.mangowc.enable = true;
+  programs.labwc.enable = true;
   programs.fish.enable = true;
   # programs.uwsm.enable = true;
   programs.nix-ld.enable = true;

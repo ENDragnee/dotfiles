@@ -95,6 +95,7 @@
     pwvucontrol
     qpwgraph
     lxappearance
+    wdisplays
     # spotify
     dwt1-shell-color-scripts
     ghostty
