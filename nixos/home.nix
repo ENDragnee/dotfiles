@@ -230,6 +230,9 @@
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
     TERM = "xterm-256color";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    CLUTTER_BACKEND = "wayland";
   };
   xresources.properties = {
     "XTerm*faceName" = "Hack Nerd Font:size=12";
