@@ -204,7 +204,10 @@ in
       };
     };
     # Provide the theme to SDDM
-    extraPackages = with pkgs; [ custom-sddm-astronaut ];
+    extraPackages = with pkgs; [
+      custom-sddm-astronaut
+      bibata-cursors
+    ];
   };
   services.asusd = {
     enable = true;
@@ -246,10 +249,9 @@ in
   programs.virt-manager.enable = true;
   programs.seahorse.enable = true;
   programs.kdeconnect.enable = true;
-  programs.niri = {
-    enable = true;
-  };
+  programs.niri.enable = true;
   programs.mangowc.enable = true;
+  programs.hyprland.enable = true;
   programs.labwc.enable = true;
   programs.fish.enable = true;
   # programs.uwsm.enable = true;
@@ -285,6 +287,9 @@ in
     custom-sddm-astronaut
     kdePackages.qtmultimedia
   ];
+  environment.sessionVariables = {
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+  };
 
   virtualisation.docker.enable = true;
   nix.settings.experimental-features = [
