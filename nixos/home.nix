@@ -53,6 +53,9 @@
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
     SOPS_AGE_KEY_FILE = "${config.home.homeDirectory}/.age/key.txt";
+    GTK_IM_MODULE = "ibus";
+    QT_IM_MODULE = "ibus";
+    XMODIFIERS = "@im=ibus";
   };
   home.stateVersion = "25.11";
 }

@@ -32,6 +32,8 @@
     sops
     openssl
     wl-clipboard
+    # m17n_db
+    # ibus-engines.m17n
 
     # networking tools
     mtr # A network diagnostic tool
