@@ -16,6 +16,7 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./modules/net-ban.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -96,13 +97,6 @@ in
 
   networking.hostName = "iced"; # Define your hostname.networking
 
-  networking.hosts = {
-    "127.0.0.1" = [
-      "rule34.xxx"
-      "rule34videos.com"
-      "pornhub.com"
-    ];
-  };
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
 
