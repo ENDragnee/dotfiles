@@ -25,8 +25,8 @@
 
       # Python
       black
-      python313Packages.python-lsp-server
-      python313Packages.debugpy
+      python314Packages.python-lsp-server
+      python314Packages.debugpy
 
       # Shell / Lua / Nix
       bash-language-server
@@ -51,6 +51,10 @@
       fd
       wl-clipboard
       lldb
+
+      #Kotlin
+      kotlin-language-server
+      ktfmt
     ];
 
     extraPlugins = ''
