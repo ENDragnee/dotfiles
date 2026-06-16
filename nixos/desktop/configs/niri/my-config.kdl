@@ -111,6 +111,7 @@ layer-rule {
 // Programs to run on startup.
 spawn-at-startup "kdeconnect-indicator"
 spawn-at-startup "xwayland-satellite"
+spawn-at-startup "ibus-daemon" "-rxRd"
 
 prefer-no-csd
 
