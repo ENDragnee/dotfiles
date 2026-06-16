@@ -17,6 +17,8 @@
     linux-wifi-hotspot
     qalculate-gtk
     eloquent
+    yt-dlp
+    spotdl
     # archives
     zip
     xz
