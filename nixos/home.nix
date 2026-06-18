@@ -14,14 +14,14 @@
     inputs.spicetify-nix.homeManagerModules.default
 
     #modules
-    ./modules/alacritty.nix
-    ./modules/direnv.nix
-    ./modules/dms.nix
-    ./modules/fish.nix
-    ./modules/git.nix
-    ./modules/packages.nix
-    ./modules/spicetify.nix
-    ./modules/theme.nix
+    ./modules/home-manager/alacritty.nix
+    ./modules/home-manager/direnv.nix
+    ./modules/home-manager/dms.nix
+    ./modules/home-manager/fish.nix
+    ./modules/home-manager/git.nix
+    ./modules/home-manager/packages.nix
+    ./modules/home-manager/spicetify.nix
+    ./modules/home-manager/theme.nix
 
     #dekstop configs
     ./desktop/applications/neovim.nix
@@ -44,7 +44,8 @@
 
   home.sessionVariables = {
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    XCURSOR_THEME = "Bibata-Modern-Classic";
+    # XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_THEME = "Adwaita";
     XCURSOR_SIZE = "24";
     # TERM = "xterm-256color";
     TERMINAL = "alacritty";
