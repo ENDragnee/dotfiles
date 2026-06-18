@@ -1,4 +1,9 @@
 { pkgs, ... }:
+let
+  custom-sddm-astronaut = pkgs.sddm-astronaut.override {
+    embeddedTheme = "japanese_aesthetic";
+  };
+in
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -41,5 +46,7 @@
     virt-viewer
     kdePackages.qtmultimedia
     m17n_db
+    custom-sddm-astronaut
+    bibata-cursors
   ];
 }

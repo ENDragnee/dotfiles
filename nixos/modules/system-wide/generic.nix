@@ -4,6 +4,6 @@
   # security.wrappers.bwrap.setuid = lib.mkForce false;
 
   environment.sessionVariables = {
-    XCURSOR_THEME = "Adwaita";
+    XCURSOR_THEME = "Bibata-Modern-Classic";
   };
 }

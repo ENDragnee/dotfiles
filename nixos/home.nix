@@ -44,8 +44,7 @@
 
   home.sessionVariables = {
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    # XCURSOR_THEME = "Bibata-Modern-Classic";
-    XCURSOR_THEME = "Adwaita";
+    XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
     # TERM = "xterm-256color";
     TERMINAL = "alacritty";

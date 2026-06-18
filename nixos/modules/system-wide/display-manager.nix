@@ -8,11 +8,12 @@ in
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    wayland.compositor = "kwin";
     theme = "sddm-astronaut-theme";
     settings = {
       Theme = {
         Current = "sddm-astronaut-theme";
-        CursorTheme = "Adwaita";
+        CursorTheme = "Bibata-Modern-Classic";
         CursorSize = 24;
       };
     };
