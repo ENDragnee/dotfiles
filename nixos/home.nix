@@ -40,6 +40,7 @@
 
   programs.niri.settings.binds = lib.mkForce { };
   xdg.configFile."niri/custom.kdl".source = ./desktop/configs/niri/my-config.kdl;
+  xdg.configFile."hypr/hyprland.lua".source = ./desktop/configs/hypr/hyprland.lua;
 
   home.sessionVariables = {
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
