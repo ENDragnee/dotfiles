@@ -1,17 +1,22 @@
 {
   config,
-  pkgs,
-  inputs,
   lib,
+  dms,
+  niri,
+  nix4nvchad,
+  spicetify-nix,
   ...
 }:
+let
+  TERM = "kitty";
+in
 {
   imports = [
-    inputs.dms.homeModules.dank-material-shell
-    inputs.dms.homeModules.niri
-    inputs.niri.homeModules.niri
-    inputs.nix4nvchad.homeManagerModule
-    inputs.spicetify-nix.homeManagerModules.default
+    dms.homeModules.dank-material-shell
+    dms.homeModules.niri
+    niri.homeModules.niri
+    nix4nvchad.homeManagerModule
+    spicetify-nix.homeManagerModules.default
 
     #modules
     ./modules/home-manager/alacritty.nix
@@ -47,8 +52,8 @@
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
     # TERM = "xterm-256color";
-    TERMINAL = "alacritty";
-    TERM_PROGRAM = "alacritty";
+    TERMINAL = TERM;
+    TERM_PROGRAM = TERM;
     QT_QPA_PLATFORM = "wayland";
     QT_QPA_PLATFORMTHEME = lib.mkForce "gtk3";
     SDL_VIDEODRIVER = "wayland";
