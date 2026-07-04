@@ -12,7 +12,8 @@ hl.monitor({
 -- Set programs that you use
 
 local mainMod = "SUPER"
-local terminal = "alacritty"
+-- local terminal = "alacritty"
+local terminal = "kitty"
 local browser = "zen"
 local browserAlt = "brave"
 local terminalGui = "ghostty"
