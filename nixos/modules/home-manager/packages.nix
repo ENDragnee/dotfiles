@@ -1,6 +1,6 @@
 {
   pkgs,
-  inputs,
+  zen-browser,
   ...
 }:
 {
@@ -36,6 +36,7 @@
     wl-clipboard
     # m17n_db
     # ibus-engines.m17n
+    kitty
 
     # networking tools
     mtr # A network diagnostic tool
@@ -94,7 +95,7 @@
     fuzzel
     rofi
     xdg-desktop-portal-gnome
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     telegram-desktop
     pwvucontrol
     qpwgraph
@@ -140,6 +141,8 @@
     pyenv
     stylua
     gemini-cli
+    ollama
+    ollama-vulkan
 
     #fonts
     nerd-fonts.hack

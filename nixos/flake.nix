@@ -21,6 +21,7 @@
     };
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
@@ -42,7 +43,14 @@
     }@inputs:
     {
       nixosConfigurations.iced = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        # specialArgs = {
+        #   inherit (inputs)
+        #     dms
+        #     niri
+        #     nix4nvchad
+        #     spicetify-nix
+        #     ;
+        # };
         modules = [
           { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./configuration.nix
@@ -53,19 +61,18 @@
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
 
-            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.extraSpecialArgs = {
+              inherit (inputs)
+                dms
+                niri
+                nix4nvchad
+                spicetify-nix
+                zen-browser
+                dgop
+                ;
+            };
             home-manager.users.end = import ./home.nix;
           }
-        ];
-      };
-      homeConfigurations.end = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-        extraSpecialArgs = { inherit inputs; };
-        modules = [
-          ./home.nix
         ];
       };
     };
