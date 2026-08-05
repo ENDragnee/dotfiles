@@ -141,6 +141,7 @@
     pyenv
     stylua
     gemini-cli
+    unstable.antigravity-cli
     ollama
     ollama-vulkan
 

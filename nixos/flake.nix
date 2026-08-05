@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,14 +44,7 @@
     }@inputs:
     {
       nixosConfigurations.iced = nixpkgs.lib.nixosSystem {
-        # specialArgs = {
-        #   inherit (inputs)
-        #     dms
-        #     niri
-        #     nix4nvchad
-        #     spicetify-nix
-        #     ;
-        # };
+        specialArgs = { inherit inputs; };
         modules = [
           { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./configuration.nix
