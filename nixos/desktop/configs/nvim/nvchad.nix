@@ -125,14 +125,16 @@
       vim.notify = (function()
         local old_notify = vim.notify
         return function(msg, level, opts)
-          if msg and type(msg) == "string" and msg:find("textDocument/signatureHelp is not supported") then
-            return
+          if msg and type(msg) == "string" then
+            if msg:find("signatureHelp") 
+               or msg:find("textDocument/signatureHelp is not supported")
+               or msg:find("Couldn't find Astro in workspace") then
+              return
+            end
           end
-          -- Pass everything else through normally
           old_notify(msg, level, opts)
         end
       end)()
-
       ------------------------------------------------------------------
       -- LSP
       ------------------------------------------------------------------
@@ -179,6 +181,7 @@
         })
 
         setup_server("vue_ls", {
+          filetypes = { "vue" },
           init_options = {
             typescript = {
               tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib",
@@ -187,10 +190,16 @@
               hybridMode = false,
             },
           },
-          filetypes = { "vue" },
         })
 
         setup_server("astro", {
+          cmd = {
+            "env",
+            "NODE_PATH=" .. "${pkgs.typescript}/lib/node_modules",
+            "astro-ls",
+            "--stdio",
+            },
+          filetypes = { "astro" },
           init_options = {
             typescript = {
               tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib",
@@ -256,10 +265,12 @@
           html = { "prettierd" },
           css = { "prettierd" },
           ejs = { "prettierd" },
+          json = { "prettierd" },
 
           c = { "clang_format" },
           cpp = { "clang_format" },
           go = { "gofmt" },
+          astro = { "prettierd" },
 
           -- I REMOVED prisma = { "prismals" } HERE.
           -- Because lsp_fallback = true is set below, Conform will automatically

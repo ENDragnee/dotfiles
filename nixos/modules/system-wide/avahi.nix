@@ -1,7 +1,7 @@
 { ... }:
 {
   services.avahi = {
-    enable = false;
+    enable = true;
     hostName = "end";
     nssmdns4 = true;
     ipv4 = true;

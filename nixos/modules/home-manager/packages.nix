@@ -70,6 +70,8 @@
     stockfish
     syncthing
     bulky
+    superfile
+    discord
 
     # system call monitoring
     strace # system call monitoring
