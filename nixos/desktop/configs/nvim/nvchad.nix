@@ -331,6 +331,7 @@
       map("n", "<leader>do", function() require("dap").step_over() end, { desc = "Dap Step Over" })
       map("n", "<leader>dt", function() require("dap").terminate() end, { desc = "Dap Terminate" })
       map("n", "<leader>du", function() require("dapui").toggle() end, { desc = "Toggle DAP UI" })
+      map("n", "<leader>rr", "<cmd> NvimTreeRefresh <cr>", {desc = "Refresh nvim tree"} )
     '';
   };
 }
