@@ -10,6 +10,7 @@
       "power"
       "docker"
       "libvirtd"
+      "plocate"
     ];
     packages = with pkgs; [
       tree

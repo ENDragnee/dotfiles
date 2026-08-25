@@ -37,6 +37,7 @@
     # m17n_db
     # ibus-engines.m17n
     kitty
+    plocate
 
     # networking tools
     mtr # A network diagnostic tool
