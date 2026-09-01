@@ -11,6 +11,7 @@
     ./nix-settings.nix
     ./nvidia.nix
     ./packages.nix
+    # ./fonts.nix
     ./users.nix
     ./xdg.nix
 

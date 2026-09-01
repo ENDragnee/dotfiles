@@ -38,6 +38,8 @@
     # ibus-engines.m17n
     kitty
     plocate
+    handbrake
+    ffmpeg
 
     # networking tools
     mtr # A network diagnostic tool

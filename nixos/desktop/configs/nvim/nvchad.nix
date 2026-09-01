@@ -102,6 +102,10 @@
           "EmranMR/tree-sitter-blade",
           ft = { "blade" },
         },
+        {
+          "virchau13/tree-sitter-astro",
+          ft = { "astro" },
+        },
       }
     '';
 
@@ -293,7 +297,7 @@
           c = { "clang_format" },
           cpp = { "clang_format" },
           go = { "gofmt" },
-          astro = { "prettierd", "prettier", stop_after_first = true },
+          astro = { "prettier" },
         },
         formatters = {
           ["blade-formatter"] = {
