@@ -15,7 +15,7 @@ in
     dms.homeModules.dank-material-shell
     dms.homeModules.niri
     niri.homeModules.niri
-    nix4nvchad.homeManagerModule
+    nix4nvchad.homeManagerModules.default
     spicetify-nix.homeManagerModules.default
 
     #modules
