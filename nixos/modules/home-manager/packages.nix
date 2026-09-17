@@ -16,7 +16,7 @@
     picard
     linux-wifi-hotspot
     qalculate-gtk
-    eloquent
+    # eloquent
     yt-dlp
     spotdl
     # archives
@@ -40,6 +40,11 @@
     plocate
     handbrake
     ffmpeg
+    tigervnc
+    ventoy-full-gtk
+    minidlna
+    # ventoy-full-qt
+    # drawy
 
     # networking tools
     mtr # A network diagnostic tool

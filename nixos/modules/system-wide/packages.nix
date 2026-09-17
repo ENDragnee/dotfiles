@@ -8,6 +8,11 @@ in
   nixpkgs.config.allowUnfree = true;
 
   # programs.firefox.enable = true;
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
   programs.dconf.enable = true;
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
