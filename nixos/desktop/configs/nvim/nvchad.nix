@@ -5,7 +5,7 @@
     enable = true;
 
     extraPackages = with pkgs; [
-      # Compilation tools for Treesitter parsers
+      # Compilation and general build tools
       gcc
       tree-sitter
       git
@@ -15,11 +15,14 @@
       # Java Runtime
       jdk
 
-      # Grammar & Spellchecker LSP
+      # Documentation Qol,Grammar & Spellchecker LSP
       harper
       ltex-ls-plus
       imagemagick
       luajitPackages.magick
+
+      # Markdown
+      markdown-oxide
 
       # PHP / Laravel
       php85
@@ -71,14 +74,13 @@
       # Kotlin
       kotlin-language-server
       ktfmt
-
-      # Markdown
-      markdown-oxide
     ];
 
     extraPlugins = ''
       return {
         { "mg979/vim-visual-multi" },
+
+        -- Debugger Adapter Protocol configs
         { "mfussenegger/nvim-dap" },
         {
           "rcarriga/nvim-dap-ui",
@@ -91,24 +93,37 @@
           end,
         },
         { "mfussenegger/nvim-dap-python" },
+
+        -- Project manager using telescope
         {
           "nvim-telescope/telescope-project.nvim",
           config = function()
             require("telescope").load_extension("project")
           end,
         },
+
+        -- Conform: The default formater for nvchad
         { "stevearc/conform.nvim" },
+
+        -- Copiot integration
         { "zbirenbaum/copilot.lua" },
         { "CopilotC-Nvim/CopilotChat.nvim", branch = "main" },
+
+        -- Laravel project into a first-class editing experience
         {
           "adalessa/laravel.nvim",
           ft = { "php", "blade" },
         },
+
+        -- Emmet plugin for web dev related suggestions
         {
           "mattn/emmet-vim",
           ft = { "html", "css", "blade", "ejs" },
         },
+
+        -- A harness to integrate AI into neovim
         { "carlos-algms/agentic.nvim" },
+        -- A plugin that enables image copy in neovim
         { "hakonharnes/img-clip.nvim" },
 
         -- Treesitter Blade Grammar + Injections & Queries
@@ -121,7 +136,7 @@
           ft = { "astro" },
         },
 
-        -- 1. Inline Image Previews
+        -- Plugin that allows inline image previews
         {
           "3rd/image.nvim",
           lazy = false,
@@ -146,7 +161,7 @@
           },
         },
 
-        -- 2. Multi-size Heading Fonts & Full Markdown Rendering
+        -- Multi-size Heading Fonts & Full Markdown Rendering
         {
           "MeanderingProgrammer/render-markdown.nvim",
           dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
@@ -163,7 +178,7 @@
           end,
         },
 
-        -- 3. Companion extension to handle LTeX Code Actions / Custom Dictionaries
+        -- Companion extension to handle LTeX Code Actions / Custom Dictionaries
         {
           "barreiroleo/ltex_extra.nvim",
           ft = { "markdown", "text", "gitcommit", "tex" },
