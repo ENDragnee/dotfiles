@@ -42,6 +42,7 @@ in
   ];
 
   fonts.fontconfig.enable = true;
+  programs.kitty.settings.term = "xterm-kitty";
 
   programs.niri.settings.binds = lib.mkForce { };
   xdg.configFile."niri/custom.kdl".source = ./desktop/configs/niri/my-config.kdl;

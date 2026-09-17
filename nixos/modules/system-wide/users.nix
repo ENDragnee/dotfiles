@@ -11,6 +11,7 @@
       "docker"
       "libvirtd"
       "plocate"
+      "kvm"
     ];
     packages = with pkgs; [
       tree

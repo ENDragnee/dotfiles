@@ -9,6 +9,17 @@
       gcc
       tree-sitter
       git
+      pkg-config
+      luajit
+
+      # Java Runtime
+      jdk
+
+      # Grammar & Spellchecker LSP
+      harper
+      ltex-ls-plus
+      imagemagick
+      luajitPackages.magick
 
       # PHP / Laravel
       php85
@@ -60,6 +71,9 @@
       # Kotlin
       kotlin-language-server
       ktfmt
+
+      # Markdown
+      markdown-oxide
     ];
 
     extraPlugins = ''
@@ -106,6 +120,54 @@
           "virchau13/tree-sitter-astro",
           ft = { "astro" },
         },
+
+        -- 1. Inline Image Previews
+        {
+          "3rd/image.nvim",
+          lazy = false,
+          ft = { "markdown", "vimwiki" },
+          build = true, 
+          opts = {
+            backend = "kitty",
+            integrations = {
+              markdown = {
+                enabled = true,
+                clear_in_insert_mode = false,
+                download_remote_images = true,
+                only_render_image_at_cursor = false,
+                filetypes = { "markdown", "vimwiki" },
+              },
+            },
+            max_width = 100,
+            max_height = 12,
+            max_width_window_percentage = math.huge,
+            max_height_window_percentage = math.huge,
+            window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "numic" },
+          },
+        },
+
+        -- 2. Multi-size Heading Fonts & Full Markdown Rendering
+        {
+          "MeanderingProgrammer/render-markdown.nvim",
+          dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+          ft = { "markdown" },
+          opts = {
+            heading = {
+              -- Enables proportional heading font scaling sizes if supported by your terminal font
+              sign = true,
+              icons = { "   ", "   ", "   ", "   ", "   ", "   " },
+            },
+          },
+          config = function(_, opts)
+            require("render-markdown").setup(opts)
+          end,
+        },
+
+        -- 3. Companion extension to handle LTeX Code Actions / Custom Dictionaries
+        {
+          "barreiroleo/ltex_extra.nvim",
+          ft = { "markdown", "text", "gitcommit", "tex" },
+        },
       }
     '';
 
@@ -126,6 +188,10 @@
           ejs = "html",
         },
       })
+
+      if os.getenv("TERM") == "xterm-256color" then
+        vim.env.TERM = "xterm-kitty"
+      end
 
       ------------------------------------------------------------------
       -- SILENCE NOTIFICATIONS
@@ -175,6 +241,38 @@
           files = {
             maxSize = 5000000,
           },
+        })
+
+        setup_server("markdown_oxide")
+        setup_server("harper_ls", {
+          filetypes = { "markdown", "text", "gitcommit" },
+          settings = {
+            ["harper-ls"] = {
+              userDictPath = "~/.config/harper/dict.txt",
+              linters = {
+                spell_check = true,
+                spelled_numbers = false,
+                avoid_curses = false,
+              },
+            },
+          },
+        })
+
+        setup_server("ltex_plus", {
+          filetypes = { "markdown", "text", "gitcommit", "tex" },
+          settings = {
+            ltex = {
+              language = "en-US", -- Set your preferred dictionary variant
+            },
+          },
+          on_attach = function(client, bufnr)
+            -- Activates the client-extension shim for dictionary writing operations
+            require("ltex_extra").setup({
+              load_langs = { "en-US" },
+              init_check = true,
+              path = vim.fn.stdpath("config") .. "/spell",
+            })
+          end,
         })
 
         setup_server("cssls")
@@ -268,6 +366,7 @@
               "gomod",
               "prisma",
               "tailwindcss",
+              "markdown"
             },
             highlight = {
               enable = true,
@@ -298,6 +397,7 @@
           cpp = { "clang_format" },
           go = { "gofmt" },
           astro = { "prettier" },
+          markdown = { "prettierd", "injected" }
         },
         formatters = {
           ["blade-formatter"] = {
@@ -336,6 +436,8 @@
       map("n", "<leader>dt", function() require("dap").terminate() end, { desc = "Dap Terminate" })
       map("n", "<leader>du", function() require("dapui").toggle() end, { desc = "Toggle DAP UI" })
       map("n", "<leader>rr", "<cmd> NvimTreeRefresh <cr>", {desc = "Refresh nvim tree"} )
+      map("n", "<leader>gi", vim.diagnostic.open_float, { silent = true, desc = "Show grammar error detail" })
+      map("n", "<leader>gl", vim.diagnostic.setloclist, { silent = true, desc = "List all file diagnostics" })
     '';
   };
 }
