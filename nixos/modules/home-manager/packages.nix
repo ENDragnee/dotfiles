@@ -43,6 +43,8 @@
     tigervnc
     ventoy-full-gtk
     minidlna
+    remmina
+    wlvncc
     # ventoy-full-qt
     # drawy
 
