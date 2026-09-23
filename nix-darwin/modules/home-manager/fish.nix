@@ -4,10 +4,10 @@
     enable = true;
 
     shellAliases = {
-      ls = "lsd --color=auto --sort 'extension'";
-      la = "lsd -a --sort 'extension'";
-      ll = "lsd -lah --sort 'extension'";
-      l = "lsd --sort 'extension'";
+      ls = "lsd --color=auto --sort 'extension' --icon-theme unicode";
+      la = "lsd -a --sort 'extension' --icon-theme unicode";
+      ll = "lsd -lah --sort 'extension' --icon-theme unicode";
+      l = "lsd --sort 'extension' --icon-theme unicode";
       y = "yazi";
       ne = "fastfetch";
       clear = "clear && colorscript -r";
