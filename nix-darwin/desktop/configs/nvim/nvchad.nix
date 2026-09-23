@@ -4,78 +4,84 @@
   programs.nvchad = {
     enable = true;
 
-    extraPackages = with pkgs; [
-      # Compilation and general build tools
-      gcc
-      tree-sitter
-      git
-      pkg-config
-      luajit
+    extraPackages =
+      with pkgs;
+      [
+        # Compilation and general build tools
+        gcc
+        tree-sitter
+        git
+        pkg-config
+        luajit
 
-      # Java Runtime
-      jdk
+        # Java Runtime
+        jdk
 
-      # Documentation Qol, Grammar & Spellchecker LSP
-      harper
-      ltex-ls-plus
-      imagemagick
-      luajitPackages.magick
+        # Documentation Qol, Grammar & Spellchecker LSP
+        harper
+        ltex-ls-plus
+        imagemagick
+        luajitPackages.magick
 
-      # Markdown
-      markdown-oxide
+        # Markdown
+        markdown-oxide
 
-      # PHP / Laravel
-      php85
-      php85Packages.composer
-      intelephense
-      blade-formatter
+        # PHP / Laravel
+        php85
+        php85Packages.composer
+        intelephense
+        blade-formatter
 
-      # Web / Frontend
-      typescript-language-server
-      typescript
-      vscode-langservers-extracted
-      tailwindcss
-      prettier
-      prettierd
-      eslint_d
-      vue-language-server
-      astro-language-server
-      tailwindcss-language-server
+        # Web / Frontend
+        typescript-language-server
+        typescript
+        vscode-langservers-extracted
+        tailwindcss
+        prettier
+        prettierd
+        eslint_d
+        vue-language-server
+        astro-language-server
+        tailwindcss-language-server
 
-      # Python
-      black
-      python314Packages.python-lsp-server
-      python314Packages.debugpy
+        # Python
+        black
+        python314Packages.python-lsp-server
+        python314Packages.debugpy
 
-      # Shell / Lua / Nix
-      bash-language-server
-      stylua
-      nil
+        # Shell / Lua / Nix
+        bash-language-server
+        stylua
+        nil
 
-      # Go
-      go
-      gopls
-      golangci-lint
-      go-tools
+        # Go
+        go
+        gopls
+        golangci-lint
+        go-tools
 
-      # C / C++
-      clang
-      clang-tools
+        # C / C++
+        clang
+        clang-tools
 
-      # Prisma
-      prisma-language-server
+        # Prisma
+        prisma-language-server
 
-      # Utils
-      ripgrep
-      fd
-      lldb
+        # Utils
+        ripgrep
+        fd
+        lldb
 
-      # Kotlin
-      kotlin-language-server
-      ktfmt
-    ] ++ (with pkgs; lib.optionals stdenv.isLinux [
-      wl-clipboard
-    ]);
+        # Kotlin
+        kotlin-language-server
+        ktfmt
+      ]
+      ++ (
+        with pkgs;
+        lib.optionals stdenv.isLinux [
+          wl-clipboard
+        ]
+      );
 
     extraPlugins = ''
       return {
@@ -421,6 +427,7 @@
           lsp_fallback = true,
         },
       })
+      vim.o.shell = "/run/current-system/sw/bin/fish"
 
       ------------------------------------------------------------------
       -- MAPPINGS
@@ -432,6 +439,10 @@
 
       map("n", "<A-p>", "<cmd> Telescope project <cr>", { desc = "Projects" })
       map("n", "<A-l>", "<cmd> Telescope terms <cr>", { desc = "Toggle hidden terminals" })
+      map("n", "<leader>tl", "<cmd> Telescope terms <cr>", { desc = "Toggle hidden terminals" })
+      map({ "n", "t" }, "<leader>ti", function()
+        require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+      end, { desc = "Toggle floating terminal" })
 
       map("i", "<C-/>", function()
         require("copilot.suggestion").accept_line()

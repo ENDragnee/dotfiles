@@ -56,6 +56,7 @@
       rustup
       lua
       stylua
+      antigravity-cli
 
       # Cross-Platform Apps / Browsers (if available/needed)
       #brave
