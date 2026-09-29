@@ -9,6 +9,7 @@
     [
       # Core CLI & File Utils
       fastfetch
+      htop
       yazi
       lsd
       ncdu
@@ -25,6 +26,7 @@
       dwt1-shell-color-scripts
       kitty
       alacritty
+      qbittorrent
 
       # Archives & Downloaders
       zip
@@ -51,12 +53,15 @@
       nodejs_24
       bun
       pnpm
+      yarn
       go
       python3
       rustup
       lua
       stylua
       antigravity-cli
+      claude-code
+      nest-cli
 
       # Cross-Platform Apps / Browsers (if available/needed)
       #brave

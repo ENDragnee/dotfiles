@@ -1,11 +1,14 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./modules/system/packages.nix
+  ];
   # Necessary for using flakes on nix-darwin
   nix.settings.experimental-features = "nix-command flakes";
   nixpkgs.config.allowUnfree = true;
   nix.enable = false;
-# Enable fish as a valid system shell
+  # Enable fish as a valid system shell
   programs.fish.enable = true;
   users.users.mastwal = {
     name = "mastwal";
