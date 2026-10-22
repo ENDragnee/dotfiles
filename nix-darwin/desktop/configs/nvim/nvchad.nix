@@ -25,6 +25,9 @@
 
         # Markdown
         markdown-oxide
+        python3Packages.pylatexenc
+        texliveMedium # provides pdflatex, dvisvgm, etc.
+        poppler-utils # provides pdftoppm for fast PDF-to-PNG conversions
 
         # PHP / Laravel
         php85
@@ -143,7 +146,7 @@
           "3rd/image.nvim",
           lazy = false,
           ft = { "markdown", "vimwiki" },
-          build = true, 
+          build = true,
           opts = {
             backend = "kitty",
             integrations = {
@@ -155,6 +158,8 @@
                 filetypes = { "markdown", "vimwiki" },
               },
             },
+            -- Enables rendering standalone $$ math blocks as inline images
+            processor = "magick_cli",
             max_width = 100,
             max_height = 12,
             max_width_window_percentage = math.huge,
@@ -170,9 +175,15 @@
           ft = { "markdown" },
           opts = {
             heading = {
-              -- Enables proportional heading font scaling sizes if supported by your terminal font
               sign = true,
               icons = { "   ", "   ", "   ", "   ", "   ", "   " },
+            },
+            latex = {
+              enabled = true,
+              converter = "latex2text",
+              highlight = "RenderMarkdownMath",
+              top_pad = 0,
+              bottom_pad = 0,
             },
           },
           config = function(_, opts)
@@ -196,6 +207,7 @@
       vim.opt.expandtab = true
       vim.opt.shiftwidth = 2
       vim.opt.tabstop = 2
+      vim.opt.conceallevel = 2
 
       vim.filetype.add({
         pattern = {
@@ -383,7 +395,9 @@
               "gomod",
               "prisma",
               "tailwindcss",
-              "markdown"
+              "markdown",
+              "latex",
+              "markdown_inline"
             },
             highlight = {
               enable = true,
@@ -450,7 +464,7 @@
 
       map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
       map("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-
+      map("n", "<leader>k", "<cmd> tab new | term <cr>", { desc = "Open a terminal in a new vim tab" })
       map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Dap Toggle Breakpoint" })
       map("n", "<leader>dr", function() require("dap").continue() end, { desc = "Dap Start/Continue" })
       map("n", "<leader>di", function() require("dap").step_into() end, { desc = "Dap Step Into" })

@@ -27,6 +27,9 @@
       kitty
       alacritty
       qbittorrent
+      qalculate-gtk
+      spotify
+      spicetify-cli
 
       # Archives & Downloaders
       zip
@@ -48,6 +51,7 @@
 
       # Essential Dev Tools
       git
+      ffmpeg
       gnumake
       gcc
       nodejs_24
@@ -62,6 +66,8 @@
       antigravity-cli
       claude-code
       nest-cli
+      sops
+      age
 
       # Cross-Platform Apps / Browsers (if available/needed)
       #brave
