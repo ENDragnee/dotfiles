@@ -43,8 +43,8 @@
     tigervnc
     ventoy-full-gtk
     minidlna
-    remmina
     wlvncc
+    android-tools
     # ventoy-full-qt
     # drawy
 

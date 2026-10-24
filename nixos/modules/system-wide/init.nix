@@ -17,6 +17,7 @@
 
     ./services/generic.nix
     ./services/brtfs.nix
+    ./services/ollama.nix
     ./overlays.nix
     ./services/locate.nix
   ];

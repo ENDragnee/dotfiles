@@ -4,6 +4,7 @@
     enable = true;
     enable32Bit = true;
   };
+  # services.xserver.videoDrivers = [ "nvidia" ]; # Crucial for NixOS to pull CUDA packages
 
   hardware.nvidia = {
     modesetting.enable = true;
