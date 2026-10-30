@@ -11,6 +11,7 @@
       fastfetch
       htop
       yazi
+      trash-cli
       lsd
       ncdu
       btop
@@ -64,6 +65,8 @@
       lua
       stylua
       antigravity-cli
+      antigravity-ide
+      opencode
       claude-code
       nest-cli
       sops

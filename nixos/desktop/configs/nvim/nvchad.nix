@@ -473,6 +473,8 @@
         require("copilot.suggestion").accept_line()
       end, { desc = "Copilot Accept Line" })
 
+      map("n", "<leader>k", <cmd> tab new | term <cr>, { desc = "Open a terminal in a new vim tab" })
+
       map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
       map("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
       map("n", "<leader>k", "<cmd> tab new | term <cr>", { desc = "Open a terminal in a new vim tab" })
