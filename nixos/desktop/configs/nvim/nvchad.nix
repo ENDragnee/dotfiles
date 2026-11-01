@@ -12,6 +12,9 @@
       pkg-config
       luajit
 
+      # Rust
+      rust-analyzer
+
       # Java Runtime
       jdk
 
@@ -79,6 +82,34 @@
     extraPlugins = ''
       return {
         { "mg979/vim-visual-multi" },
+
+        {
+          "mrcjkb/rustaceanvim",
+          version = "main",
+          ft = { "rust" },
+          lazy = false, -- Required to let it attach automatically to the rust filetype
+          config = function()
+            local lsp = require("nvchad.configs.lspconfig")
+            
+            vim.g.rustaceanvim = {
+              server = {
+                on_attach = lsp.on_attach,
+                on_init = lsp.on_init,
+                capabilities = lsp.capabilities,
+                default_settings = {
+                  ["rust-analyzer"] = {
+                    cargo = {
+                      allFeatures = true,
+                    },
+                    check = {
+                      command = "clippy",
+                    },
+                  },
+                },
+              },
+            }
+          end,
+        },
 
         -- Debugger Adapter Protocol configs
         { "mfussenegger/nvim-dap" },
@@ -411,6 +442,7 @@
           c = { "clang_format" },
           cpp = { "clang_format" },
           go = { "gofmt" },
+          rust = { "rustfmt" },
           astro = { "prettier" },
           markdown = { "prettierd", "injected" }
         },
@@ -443,7 +475,7 @@
 
       map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
       map("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-
+      map("n", "<leader>k", "<cmd> tab new | term <cr>", { desc = "Open a terminal in a new vim tab" })
       map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Dap Toggle Breakpoint" })
       map("n", "<leader>dr", function() require("dap").continue() end, { desc = "Dap Start/Continue" })
       map("n", "<leader>di", function() require("dap").step_into() end, { desc = "Dap Step Into" })
