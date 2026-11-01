@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    claude-desktop = {
+      url = "github:poeck/claude-desktop-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +44,7 @@
       nixpkgs,
       home-manager,
       nix4nvchad,
+      claude-desktop,
       ...
     }@inputs:
     {
@@ -48,6 +53,11 @@
         modules = [
           { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./configuration.nix
+          claude-desktop.nixosModules.default
+          {
+            nixpkgs.config.allowUnfree = true;
+            programs.claude-desktop.enable = true;
+          }
 
           home-manager.nixosModules.home-manager
           {

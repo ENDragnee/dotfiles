@@ -108,6 +108,7 @@
     rofi
     xdg-desktop-portal-gnome
     zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    chromium
     telegram-desktop
     pwvucontrol
     qpwgraph
@@ -125,6 +126,7 @@
     wine-staging
     chess-tui
     brave
+    qutebrowser
     obs-studio
     flameshot
     hyprpicker
@@ -154,6 +156,8 @@
     stylua
     gemini-cli
     unstable.antigravity-cli
+    unstable.opencode
+    unstable.claude-code
     ollama
     ollama-vulkan
 
