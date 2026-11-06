@@ -306,6 +306,42 @@
           notify(msg, level, opts)
         end
       end
+
+      ------------------------------------------------------------------
+      -- Mappings
+      ------------------------------------------------------------------
+      local map = vim.keymap.set
+
+      -- General
+      map("n", ";", ":", { desc = "Enter command mode" })
+      map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
+
+      -- Terminal
+      map("n", "<leader>k", "<cmd>tabnew | term<cr>", { desc = "Terminal in new tab" })
+      map("n", "<A-l>", "<cmd>Telescope terms<cr>", { desc = "Hidden terminals" })
+
+      -- Navigation
+      map("n", "<A-p>", "<cmd>Telescope project<cr>", { desc = "Projects" })
+      map("n", "<leader>rr", "<cmd>NvimTreeRefresh<cr>", { desc = "Refresh NvimTree" })
+
+      -- LSP / Diagnostics
+      map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+      map("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+      map("n", "<leader>gi", vim.diagnostic.open_float, { desc = "Diagnostic detail" })
+      map("n", "<leader>gl", vim.diagnostic.setloclist, { desc = "List diagnostics" })
+
+      -- Copilot
+      map("i", "<C-/>", function()
+        require("copilot.suggestion").accept_line()
+      end, { desc = "Copilot accept line" })
+
+      -- Debugging
+      map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "DAP toggle breakpoint" })
+      map("n", "<leader>dr", function() require("dap").continue() end, { desc = "DAP start/continue" })
+      map("n", "<leader>di", function() require("dap").step_into() end, { desc = "DAP step into" })
+      map("n", "<leader>do", function() require("dap").step_over() end, { desc = "DAP step over" })
+      map("n", "<leader>dt", function() require("dap").terminate() end, { desc = "DAP terminate" })
+      map("n", "<leader>du", function() require("dapui").toggle() end, { desc = "DAP toggle UI" })
     '';
   };
 }
