@@ -221,6 +221,13 @@
       if os.getenv("TERM") == "xterm-256color" then
         vim.env.TERM = "xterm-kitty"
       end
+      pcall(function()
+        local nvim_tree_config = require("nvchad.configs.nvimtree")
+        if nvim_tree_config and nvim_tree_config.view then
+          nvim_tree_config.view.number = true
+          nvim_tree_config.view.relativenumber = true
+        end
+      end)
 
       ------------------------------------------------------------------
       -- SILENCE NOTIFICATIONS
@@ -291,189 +298,19 @@
           filetypes = { "markdown", "text", "gitcommit", "tex" },
           settings = {
             ltex = {
-              language = "en-US", -- Set your preferred dictionary variant
+              language = "en-US",
             },
           },
           on_attach = function(client, bufnr)
-            -- Activates the client-extension shim for dictionary writing operations
             require("ltex_extra").setup({
               load_langs = { "en-US" },
-              init_check = true,
-              path = vim.fn.stdpath("config") .. "/spell",
             })
+            if lsp.on_attach then
+              lsp.on_attach(client, bufnr)
+            end
           end,
         })
-
-        setup_server("cssls")
-        setup_server("tailwindcss")
-        setup_server("bashls")
-        setup_server("nil_ls")
-        setup_server("pylsp")
-        setup_server("clangd", {
-          cmd = {
-            "clangd",
-            "--background-index",
-            "--clang-tidy",
-            "--header-insertion=iwyu",
-            "--completion-style=detailed",
-            "--function-arg-placeholders",
-            "--fallback-style=llvm",
-            "--query-driver=${pkgs.stdenv.cc}/bin/cc,${pkgs.stdenv.cc}/bin/gcc,${pkgs.clang}/bin/clang,${pkgs.clang}/bin/clang++"
-          },
-        })
-        setup_server("gopls")
-        setup_server("prismals")
-        setup_server("ts_ls", {
-          filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-        })
-
-        setup_server("vue_ls", {
-          filetypes = { "vue" },
-          init_options = {
-            typescript = {
-              tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib",
-            },
-            vue = {
-              hybridMode = false,
-            },
-          },
-        })
-
-        setup_server("astro", {
-          cmd = {
-            "env",
-            "NODE_PATH=" .. "${pkgs.typescript}/lib/node_modules",
-            "astro-ls",
-            "--stdio",
-          },
-          filetypes = { "astro" },
-          init_options = {
-            typescript = {
-              tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib",
-            },
-          },
-        })
       end)
-
-      ------------------------------------------------------------------
-      -- TREESITTER
-      ------------------------------------------------------------------
-      vim.schedule(function()
-        local ok, ts = pcall(require, "nvim-treesitter.configs")
-        if ok then
-          local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-          parser_config.blade = {
-            install_info = {
-              url = "https://github.com/EmranMR/tree-sitter-blade",
-              files = { "src/parser.c" },
-              branch = "main",
-            },
-            filetype = "blade",
-          }
-
-          ts.setup({
-            ensure_installed = {
-              "lua",
-              "vim",
-              "bash",
-              "html",
-              "css",
-              "javascript",
-              "typescript",
-              "tsx",
-              "vue",
-              "astro",
-              "json",
-              "yaml",
-              "python",
-              "php",
-              "php_only",
-              "markdown",
-              "c",
-              "cpp",
-              "go",
-              "gomod",
-              "prisma",
-              "tailwindcss",
-              "markdown",
-              "latex",
-              "markdown_inline"
-            },
-            highlight = {
-              enable = true,
-              additional_vim_regex_highlighting = { "blade" },
-            },
-            indent = { enable = true },
-          })
-        end
-      end)
-
-      ------------------------------------------------------------------
-      -- FORMATTER (CONFORM)
-      ------------------------------------------------------------------
-      require("conform").setup({
-        formatters_by_ft = {
-          lua = { "stylua" },
-          php = { "pint" },
-          blade = { "blade-formatter" },
-          python = { "black" },
-          javascript = { "prettierd" },
-          typescript = { "prettierd" },
-          vue = { "prettierd" },
-          html = { "prettierd" },
-          css = { "prettierd" },
-          ejs = { "prettierd" },
-          json = { "prettierd" },
-          c = { "clang_format" },
-          cpp = { "clang_format" },
-          go = { "gofmt" },
-          astro = { "prettier" },
-          markdown = { "prettierd", "injected" }
-        },
-        formatters = {
-          ["blade-formatter"] = {
-            command = "blade-formatter",
-            args = { "--stdin" },
-          },
-        },
-        format_on_save = {
-          timeout_ms = 4000, -- Raised from 500 to allow blade-formatter to finish
-          lsp_fallback = true,
-        },
-      })
-      vim.o.shell = "/run/current-system/sw/bin/fish"
-
-      ------------------------------------------------------------------
-      -- MAPPINGS
-      ------------------------------------------------------------------
-      local map = vim.keymap.set
-
-      map("n", ";", ":", { desc = "CMD enter command mode" })
-      map("i", "jk", "<ESC>")
-
-      map("n", "<A-p>", "<cmd> Telescope project <cr>", { desc = "Projects" })
-      map("n", "<A-l>", "<cmd> Telescope terms <cr>", { desc = "Toggle hidden terminals" })
-      map("n", "<leader>tl", "<cmd> Telescope terms <cr>", { desc = "Toggle hidden terminals" })
-      map({ "n", "t" }, "<leader>ti", function()
-        require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
-      end, { desc = "Toggle floating terminal" })
-
-      map("i", "<C-/>", function()
-        require("copilot.suggestion").accept_line()
-      end, { desc = "Copilot Accept Line" })
-
-      map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
-      map("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-      map("n", "<leader>k", "<cmd> tab new | term <cr>", { desc = "Open a terminal in a new vim tab" })
-      map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Dap Toggle Breakpoint" })
-      map("n", "<leader>dr", function() require("dap").continue() end, { desc = "Dap Start/Continue" })
-      map("n", "<leader>di", function() require("dap").step_into() end, { desc = "Dap Step Into" })
-      map("n", "<leader>do", function() require("dap").step_over() end, { desc = "Dap Step Over" })
-      map("n", "<leader>dt", function() require("dap").terminate() end, { desc = "Dap Terminate" })
-      map("n", "<leader>du", function() require("dapui").toggle() end, { desc = "Toggle DAP UI" })
-      map("n", "<leader>rr", "<cmd> NvimTreeRefresh <cr>", {desc = "Refresh nvim tree"} )
-      map("n", "<leader>gi", vim.diagnostic.open_float, { silent = true, desc = "Show grammar error detail" })
-      map("n", "<leader>gl", vim.diagnostic.setloclist, { silent = true, desc = "List all file diagnostics" })
     '';
   };
 }

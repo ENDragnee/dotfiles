@@ -15,6 +15,7 @@
     curl
     jq
     ripgrep
+    postgresql
   ];
 
   # Fonts can also be declared system-wide if desired

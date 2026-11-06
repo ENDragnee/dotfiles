@@ -31,6 +31,7 @@
       qalculate-gtk
       spotify
       spicetify-cli
+      ngrok
 
       # Archives & Downloaders
       zip
