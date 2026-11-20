@@ -44,6 +44,7 @@
       # Git & Terminal Multiplexing
       zellij
       gh
+      tmux
 
       # Networking & Diagnostics
       iperf3
@@ -66,12 +67,14 @@
       lua
       stylua
       antigravity-cli
-      antigravity-ide
+      # antigravity-ide
       opencode
       claude-code
       nest-cli
       sops
       age
+      t3code
+      bend
 
       # Cross-Platform Apps / Browsers (if available/needed)
       #brave

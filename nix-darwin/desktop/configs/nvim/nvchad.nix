@@ -75,6 +75,9 @@
         poppler-utils # pdftoppm
         imagemagick
         luajitPackages.magick
+
+        #Bend
+        bend
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.wl-clipboard ];
 
