@@ -31,7 +31,7 @@ in
     #dekstop configs
     ./desktop/applications/neovim.nix
     ./desktop/configs/flameshot/config.nix
-    ./desktop/configs/nvim/nvchad.nix
+    ./desktop/configs/nvim
     ./desktop/configs/xresources.nix
   ];
   home.username = "end";
