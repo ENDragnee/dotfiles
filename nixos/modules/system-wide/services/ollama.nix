@@ -2,9 +2,7 @@
 {
   services.ollama = {
     enable = true;
-    # package = pkgs.ollama-cuda;
     package = pkgs.ollama-vulkan;
-    # acceleration = "cuda";
     host = "127.0.0.1";
     openFirewall = false;
     environmentVariables = {

@@ -13,9 +13,6 @@
       "plocate"
       "kvm"
     ];
-    packages = with pkgs; [
-      tree
-    ];
     shell = pkgs.fish;
   };
 }

@@ -37,7 +37,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
       claude-desktop,
@@ -48,15 +47,9 @@
       nixosConfigurations.iced = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./configuration.nix
           claude-desktop.nixosModules.default
           nix-flatpak.nixosModules.nix-flatpak
-          ./modules/system-wide/flatpak.nix
-          {
-            nixpkgs.config.allowUnfree = true;
-            programs.claude-desktop.enable = true;
-          }
 
           home-manager.nixosModules.home-manager
           {

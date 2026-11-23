@@ -22,4 +22,11 @@ in
       bibata-cursors
     ];
   };
+
+  # SDDM looks up themes and cursors under /run/current-system/sw/share.
+  environment.systemPackages = with pkgs; [
+    custom-sddm-astronaut
+    kdePackages.qtmultimedia # required by sddm-astronaut theme
+    bibata-cursors
+  ];
 }

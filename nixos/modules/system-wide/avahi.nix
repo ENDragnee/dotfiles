@@ -2,7 +2,7 @@
 {
   services.avahi = {
     enable = true;
-    nssmdns4 = true; # keep if you had this
+    nssmdns4 = true;
     settings = {
       server = {
         use-ipv4 = true;

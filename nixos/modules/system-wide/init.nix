@@ -4,6 +4,7 @@
     ./avahi.nix
     ./boot.nix
     ./display-manager.nix
+    ./flatpak.nix
     ./generic.nix
     ./i18n.nix
     ./networking.nix
@@ -11,14 +12,12 @@
     ./nix-settings.nix
     ./nvidia.nix
     ./packages.nix
-    # ./fonts.nix
     ./users.nix
     ./xdg.nix
 
     ./services/generic.nix
     ./services/brtfs.nix
     ./services/ollama.nix
-    ./overlays.nix
     ./services/locate.nix
   ];
 }

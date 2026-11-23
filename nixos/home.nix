@@ -28,11 +28,10 @@ in
     ./modules/home-manager/spicetify.nix
     ./modules/home-manager/theme.nix
 
-    #dekstop configs
+    # desktop configs
     ./desktop/applications/neovim.nix
     ./desktop/configs/flameshot/config.nix
     ./desktop/configs/nvim
-    ./desktop/configs/xresources.nix
   ];
   home.username = "end";
   home.homeDirectory = "/home/end";
@@ -42,7 +41,6 @@ in
   ];
 
   fonts.fontconfig.enable = true;
-  programs.kitty.settings.term = "xterm-kitty";
 
   programs.niri.settings = {
     binds = lib.mkForce { };
@@ -54,9 +52,6 @@ in
 
   home.sessionVariables = {
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    XCURSOR_THEME = "Bibata-Modern-Classic";
-    XCURSOR_SIZE = "24";
-    # TERM = "xterm-256color";
     TERMINAL = TERM;
     TERM_PROGRAM = TERM;
     QT_QPA_PLATFORM = "wayland";
