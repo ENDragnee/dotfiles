@@ -44,7 +44,11 @@ in
   fonts.fontconfig.enable = true;
   programs.kitty.settings.term = "xterm-kitty";
 
-  programs.niri.settings.binds = lib.mkForce { };
+  programs.niri.settings = {
+    binds = lib.mkForce { };
+    layout.border.enable = true;
+  };
+
   xdg.configFile."niri/custom.kdl".source = ./desktop/configs/niri/my-config.kdl;
   xdg.configFile."hypr/hyprland.lua".source = ./desktop/configs/hypr/hyprland.lua;
 

@@ -2,15 +2,18 @@
 {
   services.avahi = {
     enable = true;
-    hostName = "end";
-    nssmdns4 = true;
-    ipv4 = true;
-    ipv6 = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      workstation = true;
+    nssmdns4 = true; # keep if you had this
+    settings = {
+      server = {
+        use-ipv4 = true;
+        use-ipv6 = true;
+        host-name = "waldo"; # replace with whatever you had in hostName
+      };
+      publish = {
+        disable-publishing = false;
+        publish-addresses = true;
+        publish-workstation = true;
+      };
     };
-    openFirewall = true;
   };
 }

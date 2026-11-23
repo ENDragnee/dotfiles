@@ -1,27 +1,24 @@
 {
-  description = "A very basic flake";
+  description = "Waldo's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
+    home-manager = {
+      url = "github:nix-community/home-manager"; # tracks master to match nixos-unstable
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     claude-desktop = {
       url = "github:poeck/claude-desktop-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    dgop = {
-      url = "github:AvengeMedia/dgop";
+      url = "github:duxlabs-dev/dux-shell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
@@ -43,8 +40,8 @@
       self,
       nixpkgs,
       home-manager,
-      nix4nvchad,
       claude-desktop,
+      nix-flatpak,
       ...
     }@inputs:
     {
@@ -54,6 +51,8 @@
           { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./configuration.nix
           claude-desktop.nixosModules.default
+          nix-flatpak.nixosModules.nix-flatpak
+          ./modules/system-wide/flatpak.nix
           {
             nixpkgs.config.allowUnfree = true;
             programs.claude-desktop.enable = true;
@@ -72,7 +71,6 @@
                 nix4nvchad
                 spicetify-nix
                 zen-browser
-                dgop
                 ;
             };
             home-manager.users.end = import ./home.nix;

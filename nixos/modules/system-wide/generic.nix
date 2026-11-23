@@ -9,8 +9,8 @@
   };
 
   nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-1.1.12"
-    "ventoy-gtk3-1.1.12"
-    "ventoy-qt5-1.1.12"
+    "ventoy-1.1.18"
+    "ventoy-gtk3-1.1.18"
+    "ventoy-qt5-1.1.18"
   ];
 }

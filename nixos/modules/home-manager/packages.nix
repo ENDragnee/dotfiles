@@ -5,183 +5,176 @@
 }:
 {
   home.packages = with pkgs; [
+    # --- Browsers ---
+    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    brave
+    # chromium # redundant with brave
+    # qutebrowser # pulls in heavy QtWebEngine
+
+    # --- Terminals & Shell ---
+    kitty
+    ghostty
+    zellij
     fastfetch
     yazi
     lsd
-    ncdu
-    btdu
-    gnuchess
-    ani-cli
-    xterm
-    picard
-    linux-wifi-hotspot
-    qalculate-gtk
-    # eloquent
-    yt-dlp
-    spotdl
-    # archives
-    zip
-    xz
-    unzip
-    p7zip
+    zoxide
+    fzf
+    ripgrep
+    jq
+    yq-go
+    glow
+    dwt1-shell-color-scripts
+    alacritty # redundant with kitty/ghostty (remove alacritty.nix import if unused)
+    # xterm # legacy X11 terminal
+    # eza # redundant with lsd
+    # superfile # redundant with yazi
 
-    # utils
-    ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    yq-go # yaml processor https://github.com/mikefarah/yq
-    eza # A modern replacement for ‘ls’
-    fzf # A command-line fuzzy finder
-    sops
-    openssl
+    # --- Wayland & Desktop Utilities ---
     wl-clipboard
-    # m17n_db
-    # ibus-engines.m17n
-    kitty
-    plocate
-    handbrake
+    xwayland-satellite
+    xdg-desktop-portal-gnome
+    xdg-utils
+    polkit_gnome
+    fuzzel
+    wdisplays
+    pwvucontrol
+    qpwgraph
+    grim
+    slurp
+    flameshot
+    hyprpicker
+    # rofi # redundant with fuzzel
+    # lxappearance # GTK2/X11 tool; usually unnecessary on Wayland
+    # bibata-cursors # already in system-wide environment.systemPackages
+    # kdePackages.kdeconnect-kde # already installed by programs.kdeconnect.enable
+
+    # --- GUI Apps ---
+    nemo-with-extensions
+    papers
+    qalculate-gtk
+    telegram-desktop
+    discord
+    vlc
+    qbittorrent
+    syncthing
+    veracrypt
+    gparted
+    gnome-disk-utility
+    xarchiver
+    bulky
+    # evince # redundant with papers (modern replacement)
+    # drawio # heavy Electron app; uncomment if used regularly
+    # obs-studio # heavy closure; uncomment when recording/streaming
+    # handbrake # heavy; ffmpeg already handles transcoding
+    # wine-staging # pulls massive 32-bit/64-bit graphics stack
+    # picard # music tagger; uncomment when needed
+    # ventoy-full-gtk # only needed when flashing USBs
+
+    # --- Media, Fun & CLI Apps ---
     ffmpeg
-    tigervnc
-    ventoy-full-gtk
-    minidlna
-    wlvncc
-    android-tools
-    # ventoy-full-qt
-    # drawy
+    yt-dlp
+    ani-cli
+    spotdl
+    chess-tui
+    stockfish
+    # gnuchess # redundant with stockfish
+    # cowsay
 
-    # networking tools
-    mtr # A network diagnostic tool
-    iperf3
-    dnsutils # `dig` + `nslookup`
-    ldns # replacement of `dig`, it provide the command `drill`
-    aria2 # A lightweight multi-protocol & multi-source command-line download utility
-    socat # replacement of openbsd-netcat
-    nmap # A utility for network discovery and security auditing
-    ipcalc # it is a calculator for the IPv4/v6 addresses
+    # --- Development & AI ---
+    gh
+    sops
+    gcc
+    gnumake
+    nodejs_24
+    bun
+    pnpm
+    go
+    rustup
+    lua
+    tree-sitter
+    stylua
+    distrobox
+    antigravity-cli
+    opencode
+    claude-code
+    ollama-vulkan
+    # ollama # duplicate (was listed twice; replaced by ollama-vulkan)
+    # python315 # conflicts with python314 in nvchad.nix; move to project flakes
+    # pyenv # prefer nix-direnv / per-project flakes
+    # php # conflicts with php85 in nvchad.nix; move to project flakes
+    # php84Packages.composer # move to project flakes
 
-    # misc
-    cowsay
+    # --- Archives & Core CLI Utils ---
+    zip
+    unzip
+    xz
+    p7zip
+    zstd
     file
     which
     tree
     gnused
     gnutar
     gawk
-    zstd
     gnupg
+    openssl
+    plocate
+    android-tools
+    # minidlna # media server; uncomment if actively streaming over LAN
 
-    # productivity
-    glow # markdown previewer in terminal
-    zellij
-    btop # replacement of htop/nmon
-    iotop # io monitoring
-    iftop # network monitoring
-    htop
+    # --- Networking & Remote Access ---
+    mtr
+    iperf3
+    dnsutils
+    aria2
+    socat
+    nmap
+    ipcalc
+    linux-wifi-hotspot
+    wlvncc
+    # ldns # redundant with dnsutils (dig)
+    # tigervnc # redundant if using wlvncc/virt-viewer
+
+    # --- System Monitoring & Diagnostics ---
+    btop
+    btdu
+    iotop
+    iftop
     nethogs
-    stockfish
-    syncthing
-    bulky
-    superfile
-    discord
-
-    # system call monitoring
-    strace # system call monitoring
-    ltrace # library call monitoring
-    lsof # list open files
-    xwayland-satellite
-    bibata-cursors
-
-    # system tools
+    strace
+    ltrace
+    lsof
     sysstat
-    lm_sensors # for `sensors` command
+    lm_sensors
     ethtool
-    pciutils # lspci
-    usbutils # lsusb
+    pciutils
+    usbutils
+    # htop # redundant with btop
+    # ncdu # redundant with btdu
 
-    #my apps
-    vlc
-    veracrypt
-    # spicetify-cli
-    alacritty
-    gparted
-    nemo-with-extensions
-    fuzzel
-    rofi
-    xdg-desktop-portal-gnome
-    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    chromium
-    telegram-desktop
-    pwvucontrol
-    qpwgraph
-    lxappearance
-    wdisplays
-    # spotify
-    dwt1-shell-color-scripts
-    ghostty
-    xdg-utils
-    kdePackages.kdeconnect-kde
-    papers
-    evince
-    xarchiver
-    drawio
-    wine-staging
-    chess-tui
-    brave
-    qutebrowser
-    obs-studio
-    flameshot
-    hyprpicker
-    gnome-disk-utility
-    qbittorrent
-    polkit_gnome
-    grim
-    slurp
-
-    #dev tools
-    nodejs_24
-    bun
-    pnpm
-    gcc
-    go
-    python315
-    php
-    php84Packages.composer
-    gnumake
-    rustup
-    tree-sitter
-    lua
-    zoxide
-    distrobox
-    ollama
-    pyenv
-    stylua
-    gemini-cli
-    unstable.antigravity-cli
-    unstable.opencode
-    unstable.claude-code
-    ollama
-    ollama-vulkan
-
-    #fonts
+    # --- Fonts ---
+    # Keep only the 1-2 Nerd Fonts you actually use; iosevka is especially large
     nerd-fonts.hack
-    nerd-fonts.hurmit
-    nerd-fonts.iosevka
     nerd-fonts.fira-mono
-    nerd-fonts.mononoki
-    nerd-fonts.roboto-mono
-    nerd-fonts.daddy-time-mono
-    nerd-fonts.fantasque-sans-mono
-    corefonts
     liberation_ttf
+    # nerd-fonts.iosevka
+    # nerd-fonts.hurmit
+    # nerd-fonts.mononoki
+    # nerd-fonts.roboto-mono
+    # nerd-fonts.daddy-time-mono
+    # nerd-fonts.fantasque-sans-mono
+    # corefonts # unfree MS fonts; uncomment only if needed for Wine/LibreOffice
 
-    #theme
-    gruvbox-kvantum
-    gruvbox-dark-gtk
-    gruvbox-gtk-theme
-    gruvbox-dark-icons-gtk
-    libsForQt5.qt5ct
-    libsForQt5.qtstyleplugin-kvantum
+    # --- Theming (GTK & Qt6) ---
     adw-gtk3
+    gruvbox-dark-gtk
+    gruvbox-dark-icons-gtk
+    gruvbox-kvantum
     kdePackages.qt6ct
     kdePackages.qtstyleplugin-kvantum
+    # gruvbox-gtk-theme # redundant with gruvbox-dark-gtk
+    # libsForQt5.qt5ct # drop Qt5 stack unless you have legacy Qt5 apps
+    # libsForQt5.qtstyleplugin-kvantum
   ];
 }

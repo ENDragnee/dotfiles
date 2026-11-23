@@ -7,8 +7,6 @@ in
 {
   nixpkgs.config.allowUnfree = true;
 
-  # programs.firefox.enable = true;
-
   programs.appimage = {
     enable = true;
     binfmt = true;
@@ -19,9 +17,9 @@ in
   programs.seahorse.enable = true;
   programs.kdeconnect.enable = true;
   programs.niri.enable = true;
-  programs.mangowc.enable = true;
-  programs.hyprland.enable = true;
-  programs.labwc.enable = true;
+  # programs.mango.enable = true;
+  # programs.hyprland.enable = true;
+  # programs.labwc.enable = true;
   programs.fish.enable = true;
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -37,21 +35,24 @@ in
   virtualisation.docker.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # --- Core & Recovery ---
     vim
     wget
     git
-    neovim
     asusctl
-    dnsmasq
-    adwaita-icon-theme
-    glib
     libmtp
-    nettools
-    seahorse
-    virt-viewer
-    kdePackages.qtmultimedia
     m17n_db
+    virt-viewer
+    # neovim # redundant; managed by Home Manager (nvchad)
+    # seahorse # already installed by programs.seahorse.enable
+    # dnsmasq # already pulled in internally by virtualisation.libvirtd
+    # nettools # legacy (ifconfig/netstat); NixOS includes iproute2 (ip/ss) by default
+    # glib # library; rarely needed in systemPackages unless calling gio/gsettings directly
+
+    # --- SDDM & System Themes ---
     custom-sddm-astronaut
+    kdePackages.qtmultimedia # required by sddm-astronaut theme
+    adwaita-icon-theme
     bibata-cursors
   ];
 }

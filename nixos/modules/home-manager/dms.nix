@@ -1,8 +1,8 @@
-{ dgop, pkgs, ... }:
+{ pkgs, ... }:
 {
   programs.dank-material-shell = {
     enable = true;
-    dgop.package = dgop.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    # dgop.package = dgop.packages.${pkgs.stdenv.hostPlatform.system}.default;
     systemd = {
       enable = true;
       restartIfChanged = true;
