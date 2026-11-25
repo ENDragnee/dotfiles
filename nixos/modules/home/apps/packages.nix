@@ -124,14 +124,9 @@
     # --- Fonts ---
     nerd-fonts.hack
     nerd-fonts.fira-mono
+    nerd-fonts.fira-code
     liberation_ttf
 
     # --- Theming (GTK & Qt6) ---
-    adw-gtk3
-    gruvbox-dark-gtk
-    gruvbox-dark-icons-gtk
-    gruvbox-kvantum
-    kdePackages.qt6ct
-    kdePackages.qtstyleplugin-kvantum
   ];
 }

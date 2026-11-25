@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, ... }:
 let
   TERM = "kitty";
 in
@@ -19,7 +19,6 @@ in
     TERMINAL = TERM;
     TERM_PROGRAM = TERM;
     QT_QPA_PLATFORM = "wayland";
-    QT_QPA_PLATFORMTHEME = lib.mkForce "gtk3";
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
     SOPS_AGE_KEY_FILE = "${config.home.homeDirectory}/.age/key.txt";
