@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  time.timeZone = "Africa/Addis_Ababa";
+
   i18n.inputMethod = {
     enable = true;
     type = "ibus";

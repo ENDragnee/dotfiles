@@ -1,8 +1,6 @@
 { ... }:
 {
-  hardware.bluetooth.enable = true;
   networking = {
-    hostName = "iced";
     networkmanager.enable = true;
     firewall = {
       enable = true;

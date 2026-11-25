@@ -47,7 +47,7 @@
       nixosConfigurations.iced = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./configuration.nix
+          ./hosts/iced
           claude-desktop.nixosModules.default
           nix-flatpak.nixosModules.nix-flatpak
 
@@ -57,16 +57,8 @@
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
 
-            home-manager.extraSpecialArgs = {
-              inherit (inputs)
-                dms
-                niri
-                nix4nvchad
-                spicetify-nix
-                zen-browser
-                ;
-            };
-            home-manager.users.end = import ./home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.end = import ./home/end.nix;
           }
         ];
       };

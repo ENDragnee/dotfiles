@@ -1,12 +1,12 @@
 {
   pkgs,
-  zen-browser,
+  inputs,
   ...
 }:
 {
   home.packages = with pkgs; [
     # --- Browsers ---
-    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     brave
 
     # --- Terminals & Shell ---

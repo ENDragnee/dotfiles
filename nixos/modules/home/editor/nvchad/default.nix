@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 let
   python = pkgs.python314.withPackages (ps: [
     ps.python-lsp-server
@@ -36,6 +36,8 @@ let
   };
 in
 {
+  imports = [ inputs.nix4nvchad.homeManagerModules.default ];
+
   programs.nvchad = {
     enable = true;
     # ~/.config/nvim is regenerated on every switch; backups only pile up.

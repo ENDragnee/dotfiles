@@ -2,8 +2,10 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./modules/system-wide/init.nix
+    ../../modules/nixos
   ];
+
+  networking.hostName = "iced";
 
   # First NixOS version installed on this machine; keeps stateful data compatible.
   # It does NOT pick the nixpkgs version. Do not change it after install, see

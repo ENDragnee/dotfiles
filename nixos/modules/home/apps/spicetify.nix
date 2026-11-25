@@ -1,9 +1,10 @@
-{ pkgs, spicetify-nix, ... }:
+{ pkgs, inputs, ... }:
 {
+  imports = [ inputs.spicetify-nix.homeManagerModules.default ];
 
   programs.spicetify =
     let
-      spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
     in
     {
       enable = true;
