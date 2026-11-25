@@ -18,4 +18,12 @@
       "flakes"
     ];
   };
+
+  # Drop generations older than two weeks, then dedupe the store.
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+  nix.optimise.automatic = true;
 }

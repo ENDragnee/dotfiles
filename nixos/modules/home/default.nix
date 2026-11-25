@@ -14,6 +14,7 @@
     ./apps/alacritty.nix
     ./apps/packages.nix
     ./apps/spicetify.nix
+    ./apps/syncthing.nix
 
     ./editor
   ];

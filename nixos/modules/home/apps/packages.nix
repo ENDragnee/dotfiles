@@ -46,7 +46,6 @@
     discord
     vlc
     qbittorrent
-    syncthing
     veracrypt
     gparted
     gnome-disk-utility

@@ -39,13 +39,15 @@ let
     ];
   };
 
+  repoNvim = ../../../../../nvim;
+
   nixLua = pkgs.writeText "nix.lua" "return ${lib.generators.toLua { } nixPaths}\n";
 
   # Needs a git-based flake (nixos-rebuild/darwin-rebuild --flake <repo>/...):
   # the path reaches outside the flake directory into the repo root.
   luaDir = pkgs.runCommandLocal "nvchad-custom-lua" { } ''
     mkdir -p $out/custom
-    cp ${../../../../../nvim/lua/custom}/*.lua $out/custom/
+    cp ${repoNvim + "/lua/custom"}/*.lua $out/custom/
     cp ${nixLua} $out/custom/nix.lua
   '';
 in
@@ -62,6 +64,11 @@ in
     enable = true;
     # ~/.config/nvim is regenerated on every switch; backups only pile up.
     backup = false;
+
+    # Same theme and plugin versions as the standalone config in nvim/. After
+    # :Lazy update, copy ~/.config/nvim/lazy-lock.json back to nvim/ to keep it.
+    chadrcConfig = builtins.readFile (repoNvim + "/lua/chadrc.lua");
+    lazy-lock = builtins.readFile (repoNvim + "/lazy-lock.json");
 
     extraPackages =
       with pkgs;
