@@ -7,7 +7,7 @@
     shellAliases = {
       ls = "lsd --color=auto --sort 'extension'";
       la = "lsd -a --sort 'extension'";
-      ll = "lsd --lah --sort 'extension'";
+      ll = "lsd -lah --sort 'extension'";
       l = "lsd --sort 'extension'";
       clear = "clear && colorscript -r";
       y = "yazi";
