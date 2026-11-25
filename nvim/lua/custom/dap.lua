@@ -1,5 +1,5 @@
 -- Runs as the nvim-dap config function (see custom/plugins.lua).
-local nix = require("custom.nix")
+local paths = require("custom.paths")
 local dap = require("dap")
 local dapui = require("dapui")
 
@@ -25,7 +25,7 @@ dap.adapters["pwa-node"] = {
   host = "127.0.0.1",
   port = "${port}",
   executable = {
-    command = nix.js_debug,
+    command = paths.js_debug,
     args = { "${port}" },
   },
 }
@@ -67,7 +67,7 @@ end
 -- C / C++ / Rust adapter via lldb-dap
 dap.adapters.lldb = {
   type = "executable",
-  command = nix.lldb_dap,
+  command = paths.lldb_dap,
   name = "lldb",
 }
 
@@ -90,4 +90,4 @@ dap.configurations.cpp = lldb_config
 dap.configurations.rust = lldb_config
 
 -- Python adapter
-require("dap-python").setup(nix.python)
+require("dap-python").setup(paths.python)

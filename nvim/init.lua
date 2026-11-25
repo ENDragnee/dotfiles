@@ -1,7 +1,8 @@
+-- Standalone entry point (non-Nix machines). Under NixOS / nix-darwin the same
+-- lua/custom modules are loaded by nix4nvchad's starter instead of this file.
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
-vim.wo.relativenumber = true
--- vim.opt.backupcopy = "yes" -- Comment it out if your not using bun and hono
+
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -24,6 +25,7 @@ require("lazy").setup({
     },
 
     { import = "plugins" },
+    { import = "custom.plugins" },
 }, lazy_config)
 
 -- load theme
@@ -37,4 +39,4 @@ vim.schedule(function()
     require "mappings"
 end)
 
-vim.cmd ":Copilot disable"
+require "custom"

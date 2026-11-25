@@ -1,5 +1,10 @@
 -- NvChad already sets number, expandtab, shiftwidth/tabstop = 2 and mapleader.
 vim.opt.relativenumber = true
+vim.opt.conceallevel = 2 -- render-markdown / markdown concealing
+
+if vim.fn.executable("fish") == 1 then
+  vim.opt.shell = vim.fn.exepath("fish")
+end
 
 -- nvchad.options puts mason/bin first on PATH, which shadows the Nix-provided
 -- servers and formatters. Keep it, but last, for mason-only tools (e.g. pint).

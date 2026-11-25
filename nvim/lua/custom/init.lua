@@ -1,4 +1,5 @@
--- Entry point, required from lua/extraConfig.lua after NvChad has loaded.
+-- Entry point. Required from lua/extraConfig.lua under Nix (nix4nvchad) and from
+-- init.lua in a plain checkout, after NvChad has loaded.
 -- LSP, DAP and treesitter are wired up from their plugin specs in custom/plugins.lua.
 
 require("custom.options")

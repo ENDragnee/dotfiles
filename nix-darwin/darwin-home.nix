@@ -1,17 +1,14 @@
 {
   config,
   lib,
-  nix4nvchad,
   ...
 }:
 {
   imports = [
-    nix4nvchad.homeManagerModules.default
-
     # Import your specific modules for git, fish, and neovim
     ./modules/home-manager/fish.nix
     ./modules/home-manager/git.nix
-    ./desktop/configs/nvim/nvchad.nix # Assuming this is your niched.nix renamed or included
+    ../nixos/modules/home/editor/nvchad # shared with NixOS; Lua in ../nvim/lua/custom
     ./modules/home-manager/packages.nix
   ];
 
@@ -25,6 +22,12 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+  };
+
+  dotfiles.nvchad = {
+    java.enable = true;
+    prose.enable = true;
+    latex.enable = true;
   };
 
   # Let Home Manager install and manage itself.
