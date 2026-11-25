@@ -90,7 +90,7 @@
     ]
     ++ (
       with pkgs;
-      lib.optionals stdenv.isLinux [
+      lib.optionals stdenv.hostPlatform.isLinux [
         # Keep Linux-only utilities strictly bounded here if you share configurations
         wl-clipboard
         libsecret

@@ -1,9 +1,8 @@
 {
-  description = "Nix-darwin and NixOS configuration";
+  description = "nix-darwin configuration for mastwal-mac";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -33,11 +32,6 @@
       ...
     }@inputs:
     {
-      # Your existing NixOS config
-      nixosConfigurations.iced = nixpkgs.lib.nixosSystem {
-        # ... existing nixos config ...
-      };
-
       # New macOS / nix-darwin configuration for your Mac mini M2
       darwinConfigurations."mastwal-mac" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
@@ -48,6 +42,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
+            # Replace an existing *.backup instead of failing activation.
+            home-manager.overwriteBackup = true;
             
             home-manager.extraSpecialArgs = {
               inherit inputs nix4nvchad;

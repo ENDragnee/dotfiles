@@ -31,6 +31,8 @@ let
     js_debug = "${pkgs.vscode-js-debug}/bin/js-debug";
     lldb_dap = "${pkgs.lldb}/bin/lldb-dap";
     python = "${python}/bin/python";
+    treesitter_plugin = "${treesitter}";
+    treesitter_runtime = "${treesitterRuntime}";
     clangd_query_driver = lib.concatStringsSep "," [
       "${pkgs.stdenv.cc}/bin/cc"
       "${pkgs.stdenv.cc}/bin/gcc"
@@ -40,6 +42,66 @@ let
   };
 
   repoNvim = ../../../../../nvim;
+
+  # nvim-treesitter from nixpkgs plus the grammars below: the plugin, its queries and
+  # the parsers stay one consistent version and nothing compiles at runtime. Keep in
+  # sync with ensure_installed in nvim/lua/custom/plugins.lua (used standalone).
+  treesitter = pkgs.vimPlugins.nvim-treesitter;
+  # Names, not a `with` list: `python`/`typescript` would resolve to the let bindings.
+  grammars = map (name: treesitter.grammarPlugins.${name}) [
+    # NvChad defaults + editor internals
+    "lua"
+    "luadoc"
+    "printf"
+    "vim"
+    "vimdoc"
+    "query"
+    "regex"
+    "diff"
+    "gitcommit"
+    "git_rebase"
+    # Shell / Nix / config
+    "bash"
+    "fish"
+    "nix"
+    "json"
+    "yaml"
+    "toml"
+    "dockerfile"
+    "sql"
+    # Web
+    "html"
+    "css"
+    "javascript"
+    "typescript"
+    "tsx"
+    "vue"
+    "astro"
+    "prisma"
+    # PHP / Laravel
+    "php"
+    "php_only"
+    "blade"
+    # Systems
+    "c"
+    "cpp"
+    "rust"
+    "go"
+    "gomod"
+    "python"
+    "kotlin"
+    "java"
+    # Docs
+    "markdown"
+    "markdown_inline"
+    "latex"
+  ];
+  treesitterRuntime = pkgs.symlinkJoin {
+    name = "nvim-treesitter-runtime";
+    paths = grammars ++ [
+      (pkgs.runCommandLocal "nvim-treesitter-queries" { } "mkdir $out && ln -s ${treesitter}/runtime/queries $out/queries")
+    ];
+  };
 
   nixLua = pkgs.writeText "nix.lua" "return ${lib.generators.toLua { } nixPaths}\n";
 

@@ -14,16 +14,16 @@ map("n", "<leader>rr", "<cmd>NvimTreeRefresh<cr>", { desc = "Refresh nvim tree" 
 
 -- DAP
 local function dap(fn)
-  return function()
-    require("dap")[fn]()
-  end
+    return function()
+        require("dap")[fn]()
+    end
 end
 
-map("n", "<leader>db", dap("toggle_breakpoint"), { desc = "DAP Toggle Breakpoint" })
-map("n", "<leader>dr", dap("continue"), { desc = "DAP Start/Continue" })
-map("n", "<leader>di", dap("step_into"), { desc = "DAP Step Into" })
-map("n", "<leader>do", dap("step_over"), { desc = "DAP Step Over" })
-map("n", "<leader>dt", dap("terminate"), { desc = "DAP Terminate" })
+map("n", "<leader>db", dap "toggle_breakpoint", { desc = "DAP Toggle Breakpoint" })
+map("n", "<leader>dr", dap "continue", { desc = "DAP Start/Continue" })
+map("n", "<leader>di", dap "step_into", { desc = "DAP Step Into" })
+map("n", "<leader>do", dap "step_over", { desc = "DAP Step Over" })
+map("n", "<leader>dt", dap "terminate", { desc = "DAP Terminate" })
 map("n", "<leader>du", function()
-  require("dapui").toggle()
+    require("dapui").toggle()
 end, { desc = "DAP Toggle UI" })
