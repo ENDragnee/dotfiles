@@ -31,7 +31,6 @@
       "me.proton.Pass"
 
       # --- Gaming ---
-      "com.valvesoftware.Steam"
       "com.usebottles.bottles"
       "net.lutris.Lutris"
       "net.davidotek.pupgui2" # ProtonUp-Qt

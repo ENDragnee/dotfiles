@@ -7,6 +7,7 @@
     binfmt = true;
   };
   programs.claude-desktop.enable = true;
+  programs.steam.enable = true;
   programs.dconf.enable = true;
   programs.seahorse.enable = true;
   programs.kdeconnect.enable = true;

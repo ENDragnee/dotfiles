@@ -10,6 +10,7 @@
     brave
 
     # --- Terminals & Shell ---
+    xterm
     kitty
     ghostty
     zellij
